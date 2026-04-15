@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freight Extract Tools</title>
+    <style>
+        :root {
+            --bg: #f4f6f8;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --panel: #ffffff;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --northline: #0b66ff;
+            --northline-soft: #f8fbff;
+            --airroad: #d97706;
+            --airroad-soft: #fffaf2;
+            --success: #166534;
+            --error: #b91c1c;
+            --error-soft: #fef2f2;
+            --border: #d1d5db;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            margin: 0;
+            padding: 32px;
+            color: var(--text);
+        }
+
+        .wrap {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 24px;
+            font-size: 32px;
+        }
+
+        .intro {
+            color: var(--muted);
+            margin-bottom: 26px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--panel);
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            border-top: 6px solid var(--border);
+        }
+
+        .card.northline {
+            border-top-color: var(--northline);
+            background: linear-gradient(to bottom, var(--northline-soft) 0%, #ffffff 22%);
+        }
+
+        .card.airroad {
+            border-top-color: var(--airroad);
+            background: linear-gradient(to bottom, var(--airroad-soft) 0%, #ffffff 22%);
+        }
+
+        .tool-label {
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .northline .tool-label { color: var(--northline); }
+        .airroad .tool-label { color: var(--airroad); }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 24px;
+            color: #111827;
+        }
+
+        p {
+            color: #4b5563;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .drop-zone {
+            border: 2px dashed #bfd4ff;
+            border-radius: 16px;
+            padding: 22px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.75);
+            transition: border-color 0.2s ease, background 0.2s ease, transform 0.1s ease;
+            cursor: pointer;
+            margin: 18px 0 14px;
+        }
+
+        .airroad .drop-zone {
+            border-color: #f2c48d;
+        }
+
+        .drop-zone.dragover {
+            border-color: #2563eb;
+            background: #eef5ff;
+            transform: translateY(-1px);
+        }
+
+        .airroad .drop-zone.dragover {
+            border-color: #b86305;
+            background: #fff1df;
+        }
+
+        .drop-zone-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .drop-zone-subtitle {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .hidden-file-input {
+            display: none;
+        }
+
+        .selected-files {
+            margin-top: 12px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .file-pill {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(11, 102, 255, 0.06);
+            border: 1px solid rgba(11, 102, 255, 0.12);
+        }
+
+        .airroad .file-pill {
+            background: rgba(217, 119, 6, 0.07);
+            border-color: rgba(217, 119, 6, 0.16);
+        }
+
+        .file-pill.oversize {
+            background: var(--error-soft);
+            border-color: #fecaca;
+        }
+
+        .file-name {
+            font-size: 14px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .file-meta {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .checkbox-row {
+            margin: 14px 0 18px;
+            color: #374151;
+        }
+
+        button {
+            background: var(--northline);
+            color: white;
+            border: 0;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+        }
+
+        button:hover { background: #0956d6; }
+        button:active { transform: translateY(1px); }
+
+        .airroad button {
+            background: var(--airroad);
+        }
+
+        .airroad button:hover {
+            background: #b86305;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .secondary-button {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        .secondary-button:hover {
+            background: #d1d5db;
+        }
+
+        .note {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        .progress-wrap {
+            display: none;
+            margin-top: 16px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #0b66ff, #60a5fa);
+            transition: width 0.15s ease;
+        }
+
+        .airroad .progress-bar {
+            background: linear-gradient(90deg, #d97706, #fbbf24);
+        }
+
+        .progress-text {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .hidden-submit {
+            opacity: 0.65;
+            pointer-events: none;
+        }
+
+        .status-message {
+            margin-top: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            min-height: 20px;
+        }
+
+        .status-error {
+            color: var(--error);
+        }
+
+        .status-success {
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-warning {
+            color: #92400e;
+        }
+
+        @media (max-width: 640px) {
+            body { padding: 18px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>Freight Extract Tools</h1>
+        <div class="intro">Vercel-ready version with drag and drop uploads, file size checking, upload progress, and clearer file previews.</div>
+
+        <div class="grid">
+            <div class="card northline">
+                <div class="tool-label">Northline</div>
+                <h2>PDF Connote Extractor</h2>
+                <p>Upload one or more PDF manifest files and export just the connote numbers to Excel.</p>
+
+                <form method="post" action="/extract-pdf-connotes" enctype="multipart/form-data" class="processing-form" data-accept=".pdf">
+                    <input type="file" name="pdf_files" accept=".pdf" multiple required class="hidden-file-input">
+
+                    <div class="drop-zone">
+                        <div class="drop-zone-title">Drop PDF files here</div>
+                        <div class="drop-zone-subtitle">or click to browse</div>
+                    </div>
+
+                    <div class="selected-files"></div>
+
+                    <div class="checkbox-row">
+                        <label>
+                            <input type="checkbox" name="remove_duplicates">
+                            Remove duplicate connote numbers
+                        </label>
+                    </div>
+
+                    <div class="button-row">
+                        <button type="submit">Extract PDF Connotes</button>
+                        <button type="button" class="secondary-button clear-files">Clear files</button>
+                    </div>
+
+                    <div class="progress-wrap">
+                        <div class="progress-track">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="progress-text">Starting upload...</div>
+                    </div>
+
+                    <div class="status-message"></div>
+                </form>
+            </div>
+
+            <div class="card airroad">
+                <div class="tool-label">Airroad Reverse Billing</div>
+                <h2>Amount / Comment Extractor</h2>
+                <p>Upload one or more Excel files and export only:</p>
+                <p><strong>Connote Code</strong>, <strong>Amount</strong>, and <strong>First Comment</strong>.</p>
+                <p class="note">Only rows with a value in the Amount column are included. Rows without a real connote code are ignored, which prevents totals or section rows being picked up.</p>
+
+                <form method="post" action="/extract-amount-comments" enctype="multipart/form-data" class="processing-form" data-accept=".xlsx,.xlsm">
+                    <input type="file" name="excel_files" accept=".xlsx,.xlsm" multiple required class="hidden-file-input">
+
+                    <div class="drop-zone">
+                        <div class="drop-zone-title">Drop Excel files here</div>
+                        <div class="drop-zone-subtitle">or click to browse</div>
+                    </div>
+
+                    <div class="selected-files"></div>
+
+                    <div class="button-row">
+                        <button type="submit">Extract Amount / Comment Data</button>
+                        <button type="button" class="secondary-button clear-files">Clear files</button>
+                    </div>
+
+                    <div class="progress-wrap">
+                        <div class="progress-track">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="progress-text">Starting upload...</div>
+                    </div>
+
+                    <div class="status-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4 MB
+        const forms = document.querySelectorAll(".processing-form");
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return `${bytes} B`;
+            if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+            return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+        }
+
+        function setStatus(form, message, type) {
+            const status = form.querySelector(".status-message");
+            if (!status) return;
+
+            status.textContent = message || "";
+            status.className = "status-message";
+
+            if (type === "error") {
+                status.classList.add("status-error");
+            } else if (type === "success") {
+                status.classList.add("status-success");
+            } else if (type === "warning") {
+                status.classList.add("status-warning");
+            }
+        }
+
+        function setFormBusy(form, isBusy) {
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (!submitButton) return;
+
+            if (isBusy) {
+                submitButton.classList.add("hidden-submit");
+                submitButton.disabled = true;
+            } else {
+                submitButton.classList.remove("hidden-submit");
+                submitButton.disabled = false;
+            }
+        }
+
+        function getFilenameFromDisposition(contentDisposition) {
+            if (!contentDisposition) return "extracted data.xlsx";
+
+            const utf8Match = contentDisposition.match(/filename\*=UTF-8''([^;]+)/i);
+            if (utf8Match && utf8Match[1]) {
+                return decodeURIComponent(utf8Match[1]);
+            }
+
+            const asciiMatch = contentDisposition.match(/filename="([^"]+)"/i);
+            if (asciiMatch && asciiMatch[1]) {
+                return asciiMatch[1];
+            }
+
+            return "extracted data.xlsx";
+        }
+
+        function getExtractedRows(response) {
+            const value = response.getResponseHeader("X-Extracted-Rows");
+            if (!value) return null;
+            const count = parseInt(value, 10);
+            return Number.isNaN(count) ? null : count;
+        }
+
+        function updateProgress(form, percent, text) {
+            const wrap = form.querySelector(".progress-wrap");
+            const bar = form.querySelector(".progress-bar");
+            const label = form.querySelector(".progress-text");
+
+            if (!wrap || !bar || !label) return;
+
+            wrap.style.display = "block";
+            bar.style.width = `${Math.max(0, Math.min(100, percent))}%`;
+            label.textContent = text;
+        }
+
+        function resetProgress(form) {
+            const wrap = form.querySelector(".progress-wrap");
+            const bar = form.querySelector(".progress-bar");
+            const label = form.querySelector(".progress-text");
+
+            if (!wrap || !bar || !label) return;
+
+            wrap.style.display = "none";
+            bar.style.width = "0%";
+            label.textContent = "Starting upload...";
+        }
+
+        function validateFiles(form, files) {
+            if (!files || files.length === 0) {
+                return { ok: false, message: "Please choose at least one file." };
+            }
+
+            for (const file of files) {
+                if (file.size > MAX_FILE_SIZE) {
+                    return {
+                        ok: false,
+                        message: `File "${file.name}" is ${formatFileSize(file.size)}. Maximum allowed is 4.00 MB.`
+                    };
+                }
+            }
+
+            return { ok: true };
+        }
+
+        function updateFileList(form) {
+            const fileInput = form.querySelector('input[type="file"]');
+            const list = form.querySelector(".selected-files");
+            if (!fileInput || !list) return;
+
+            list.innerHTML = "";
+
+            const files = Array.from(fileInput.files || []);
+            if (!files.length) return;
+
+            files.forEach(file => {
+                const item = document.createElement("div");
+                item.className = "file-pill";
+                if (file.size > MAX_FILE_SIZE) {
+                    item.classList.add("oversize");
+                }
+
+                const name = document.createElement("div");
+                name.className = "file-name";
+                name.textContent = file.name;
+
+                const meta = document.createElement("div");
+                meta.className = "file-meta";
+                meta.textContent = file.size > MAX_FILE_SIZE
+                    ? `${formatFileSize(file.size)} · too large`
+                    : formatFileSize(file.size);
+
+                item.appendChild(name);
+                item.appendChild(meta);
+                list.appendChild(item);
+            });
+
+            const validation = validateFiles(form, files);
+            if (!validation.ok) {
+                setStatus(form, validation.message, "error");
+            } else {
+                setStatus(form, "", "");
+            }
+        }
+
+        function wireDropZone(form) {
+            const fileInput = form.querySelector('input[type="file"]');
+            const dropZone = form.querySelector(".drop-zone");
+            const clearButton = form.querySelector(".clear-files");
+            const accepted = (form.dataset.accept || "").split(",").map(v => v.trim().toLowerCase()).filter(Boolean);
+
+            if (!fileInput || !dropZone) return;
+
+            dropZone.addEventListener("click", () => fileInput.click());
+
+            fileInput.addEventListener("change", () => {
+                updateFileList(form);
+            });
+
+            ["dragenter", "dragover"].forEach(eventName => {
+                dropZone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    dropZone.classList.add("dragover");
+                });
+            });
+
+            ["dragleave", "drop"].forEach(eventName => {
+                dropZone.addEventListener(eventName, (event) => {
+                    event.preventDefault();
+                    dropZone.classList.remove("dragover");
+                });
+            });
+
+            dropZone.addEventListener("drop", (event) => {
+                const dropped = Array.from(event.dataTransfer.files || []);
+                if (!dropped.length) return;
+
+                const filtered = dropped.filter(file => {
+                    const lower = file.name.toLowerCase();
+                    return accepted.some(ext => lower.endsWith(ext));
+                });
+
+                const dt = new DataTransfer();
+                filtered.forEach(file => dt.items.add(file));
+                fileInput.files = dt.files;
+                updateFileList(form);
+
+                if (filtered.length !== dropped.length) {
+                    setStatus(form, "Some files were ignored because they were the wrong file type.", "warning");
+                }
+            });
+
+            if (clearButton) {
+                clearButton.addEventListener("click", () => {
+                    fileInput.value = "";
+                    updateFileList(form);
+                    resetProgress(form);
+                    setStatus(form, "", "");
+                });
+            }
+        }
+
+        function downloadBlob(blob, filename) {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function submitWithProgress(form) {
+            const fileInput = form.querySelector('input[type="file"]');
+            const files = Array.from(fileInput.files || []);
+            const validation = validateFiles(form, files);
+
+            if (!validation.ok) {
+                setStatus(form, validation.message, "error");
+                return;
+            }
+
+            setFormBusy(form, true);
+            setStatus(form, "", "");
+            updateProgress(form, 0, "Preparing upload...");
+
+            const formData = new FormData(form);
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", form.action, true);
+            xhr.responseType = "blob";
+
+            xhr.upload.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    const percent = Math.round((event.loaded / event.total) * 100);
+                    updateProgress(form, percent, `Uploading... ${percent}%`);
+                } else {
+                    updateProgress(form, 30, "Uploading...");
+                }
+            };
+
+            xhr.onloadstart = () => {
+                updateProgress(form, 2, "Starting upload...");
+            };
+
+            xhr.onload = () => {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    updateProgress(form, 100, "Finishing download...");
+                    const filename = getFilenameFromDisposition(xhr.getResponseHeader("Content-Disposition"));
+                    downloadBlob(xhr.response, filename);
+
+                    const rowCount = getExtractedRows(xhr);
+                    if (rowCount === null) {
+                        setStatus(form, "✔ File extracted successfully", "success");
+                    } else {
+                        const label = rowCount === 1 ? "record" : "records";
+                        setStatus(form, `✔ File extracted successfully (${rowCount} ${label})`, "success");
+                    }
+                } else {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        setStatus(form, reader.result || "Processing failed.", "error");
+                    };
+                    reader.onerror = () => {
+                        setStatus(form, "Processing failed.", "error");
+                    };
+                    reader.readAsText(xhr.response);
+                }
+
+                setFormBusy(form, false);
+                resetProgress(form);
+            };
+
+            xhr.onerror = () => {
+                setStatus(form, "Network error while uploading the file.", "error");
+                setFormBusy(form, false);
+                resetProgress(form);
+            };
+
+            xhr.send(formData);
+        }
+
+        forms.forEach(form => {
+            wireDropZone(form);
+
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                submitWithProgress(form);
+            });
+        });
+    </script>
+</body>
+</html>
