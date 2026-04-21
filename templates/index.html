@@ -1,662 +1,973 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freight Extract Tools</title>
-    <style>
-        :root {
-            --bg: #f4f6f8;
-            --text: #1f2937;
-            --muted: #6b7280;
-            --panel: #ffffff;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            --northline: #0b66ff;
-            --northline-soft: #f8fbff;
-            --airroad: #d97706;
-            --airroad-soft: #fffaf2;
-            --success: #166534;
-            --error: #b91c1c;
-            --error-soft: #fef2f2;
-            --border: #d1d5db;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freight Extract Tools</title>
 
-        * { box-sizing: border-box; }
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 30px;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: var(--bg);
-            margin: 0;
-            padding: 32px;
-            color: var(--text);
-        }
+.wrap {
+    max-width: 1380px;
+    margin: 0 auto;
+}
 
-        .wrap {
-            max-width: 1120px;
-            margin: 0 auto;
-        }
+h1 {
+    margin-bottom: 20px;
+}
 
-        h1 {
-            margin-top: 0;
-            margin-bottom: 24px;
-            font-size: 32px;
-        }
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
 
-        .intro {
-            color: var(--muted);
-            margin-bottom: 26px;
-        }
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-            gap: 24px;
-        }
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border-top: 6px solid #ccc;
+}
 
-        .card {
-            background: var(--panel);
-            padding: 28px;
-            border-radius: 18px;
-            box-shadow: var(--shadow);
-            border-top: 6px solid var(--border);
-        }
+.northline { border-top-color: #0b66ff; }
+.airroad { border-top-color: #d97706; }
+.calc { border-top-color: #10b981; }
+.cubic { border-top-color: #8b5cf6; }
 
-        .card.northline {
-            border-top-color: var(--northline);
-            background: linear-gradient(to bottom, var(--northline-soft) 0%, #ffffff 22%);
-        }
+.tool-label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    color: #555;
+}
 
-        .card.airroad {
-            border-top-color: var(--airroad);
-            background: linear-gradient(to bottom, var(--airroad-soft) 0%, #ffffff 22%);
-        }
+.drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.15s ease;
+}
 
-        .tool-label {
-            font-weight: 700;
-            font-size: 13px;
-            margin-bottom: 8px;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
+.drop-zone.dragover {
+    background: #eef5ff;
+    border-color: #0b66ff;
+}
 
-        .northline .tool-label { color: var(--northline); }
-        .airroad .tool-label { color: var(--airroad); }
+.selected-files {
+    margin-top: 10px;
+}
 
-        h2 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            font-size: 24px;
-            color: #111827;
-        }
+.file-pill {
+    background: #eef5ff;
+    padding: 8px 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+}
 
-        p {
-            color: #4b5563;
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
+.file-pill.oversize {
+    background: #fee2e2;
+}
 
-        .drop-zone {
-            border: 2px dashed #bfd4ff;
-            border-radius: 16px;
-            padding: 22px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.75);
-            transition: border-color 0.2s ease, background 0.2s ease, transform 0.1s ease;
-            cursor: pointer;
-            margin: 18px 0 14px;
-        }
+button {
+    margin-top: 10px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #0b66ff;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
 
-        .airroad .drop-zone {
-            border-color: #f2c48d;
-        }
+button:hover {
+    opacity: 0.93;
+}
 
-        .drop-zone.dragover {
-            border-color: #2563eb;
-            background: #eef5ff;
-            transform: translateY(-1px);
-        }
+.airroad button {
+    background: #d97706;
+}
 
-        .airroad .drop-zone.dragover {
-            border-color: #b86305;
-            background: #fff1df;
-        }
+.progress-wrap {
+    display: none;
+    background: #ddd;
+    height: 10px;
+    border-radius: 999px;
+    margin-top: 10px;
+    overflow: hidden;
+}
 
-        .drop-zone-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
+.progress-bar {
+    height: 10px;
+    width: 0%;
+    background: #0b66ff;
+    border-radius: 999px;
+}
 
-        .drop-zone-subtitle {
-            color: var(--muted);
-            font-size: 14px;
-        }
+.status-message {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
 
-        .hidden-file-input {
-            display: none;
-        }
+.status-success { color: green; }
+.status-error { color: red; }
 
-        .selected-files {
-            margin-top: 12px;
-            display: grid;
-            gap: 10px;
-        }
+.calc-input {
+    width: 260px;
+    max-width: 100%;
+    padding: 8px 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 15px;
+}
 
-        .file-pill {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 12px;
-            align-items: center;
-            padding: 10px 12px;
-            border-radius: 12px;
-            background: rgba(11, 102, 255, 0.06);
-            border: 1px solid rgba(11, 102, 255, 0.12);
-        }
+.calc label,
+.cubic label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 500;
+}
 
-        .airroad .file-pill {
-            background: rgba(217, 119, 6, 0.07);
-            border-color: rgba(217, 119, 6, 0.16);
-        }
+.calc-result-row,
+.result-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
 
-        .file-pill.oversize {
-            background: var(--error-soft);
-            border-color: #fecaca;
-        }
+.calc-result {
+    font-size: 20px;
+    color: #10b981;
+    font-weight: bold;
+}
 
-        .file-name {
-            font-size: 14px;
-            font-weight: 600;
-            word-break: break-word;
-        }
+.copy-btn {
+    background: #10b981;
+    margin-top: 0;
+}
 
-        .file-meta {
-            font-size: 12px;
-            color: var(--muted);
-            text-align: right;
-            white-space: nowrap;
-        }
+.copy-btn:hover {
+    opacity: 0.9;
+}
 
-        .checkbox-row {
-            margin: 14px 0 18px;
-            color: #374151;
-        }
+.percent-section {
+    margin: 10px 0 6px;
+}
 
-        button {
-            background: var(--northline);
-            color: white;
-            border: 0;
-            padding: 12px 18px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
-        }
+.percent-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #4b5563;
+    margin-bottom: 6px;
+}
 
-        button:hover { background: #0956d6; }
-        button:active { transform: translateY(1px); }
+.percent-buttons {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
 
-        .airroad button {
-            background: var(--airroad);
-        }
+.percent-btn {
+    background: #e5e7eb;
+    color: #111827;
+    font-size: 12px;
+    margin-top: 0;
+    padding: 7px 10px;
+}
 
-        .airroad button:hover {
-            background: #b86305;
-        }
+.percent-btn:hover {
+    opacity: 1;
+    background: #d1d5db;
+}
 
-        .button-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+.percent-btn.favorite {
+    background: #f59e0b;
+    color: white;
+}
 
-        .secondary-button {
-            background: #e5e7eb;
-            color: #111827;
-        }
+.percent-btn.favorite:hover {
+    background: #d97706;
+}
 
-        .secondary-button:hover {
-            background: #d1d5db;
-        }
+.pin-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+}
 
-        .note {
-            font-size: 14px;
-            color: var(--muted);
-            margin-top: 12px;
-        }
+.pin-input {
+    width: 120px !important;
+    margin-top: 0 !important;
+}
 
-        .progress-wrap {
-            display: none;
-            margin-top: 16px;
-        }
+.pin-btn {
+    background: #111827;
+    margin-top: 0;
+}
 
-        .progress-track {
-            width: 100%;
-            height: 12px;
-            background: #e5e7eb;
-            border-radius: 999px;
-            overflow: hidden;
-        }
+.pin-btn:hover {
+    background: #000;
+}
 
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #0b66ff, #60a5fa);
-            transition: width 0.15s ease;
-        }
+.history-box {
+    margin-top: 16px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 10px;
+    background: #fafafa;
+}
 
-        .airroad .progress-bar {
-            background: linear-gradient(90deg, #d97706, #fbbf24);
-        }
+.history-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
 
-        .progress-text {
-            margin-top: 8px;
-            font-size: 13px;
-            color: #374151;
-            font-weight: 600;
-        }
+.history-title {
+    font-weight: bold;
+}
 
-        .hidden-submit {
-            opacity: 0.65;
-            pointer-events: none;
-        }
+.history-clear-btn {
+    background: #ef4444;
+    margin-top: 0;
+    padding: 7px 12px;
+    font-size: 12px;
+}
 
-        .status-message {
-            margin-top: 14px;
-            font-size: 14px;
-            font-weight: 600;
-            min-height: 20px;
-        }
+.history-clear-btn:hover {
+    background: #dc2626;
+}
 
-        .status-error {
-            color: var(--error);
-        }
+.history {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 220px;
+    overflow-y: auto;
+}
 
-        .status-success {
-            color: var(--success);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+.history-item {
+    background: white;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    border: 1px solid #e5e7eb;
+    line-height: 1.4;
+}
 
-        .status-warning {
-            color: #92400e;
-        }
+.history-empty {
+    color: #6b7280;
+    font-size: 12px;
+}
 
-        @media (max-width: 640px) {
-            body { padding: 18px; }
-            .grid { grid-template-columns: 1fr; }
-        }
-    </style>
+.small-note,
+.cubic-note {
+    color: #6b7280;
+    font-size: 12px;
+    margin-top: 6px;
+    line-height: 1.4;
+}
+
+.result-label {
+    font-size: 14px;
+    color: #4b5563;
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+.result-value {
+    font-size: 20px;
+    color: #8b5cf6;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.copy-btn-purple {
+    background: #8b5cf6;
+    margin-top: 0;
+}
+
+.copy-btn-purple:hover {
+    background: #7c3aed;
+}
+
+.dim-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(80px, 1fr));
+    gap: 10px;
+    max-width: 320px;
+}
+
+.auto-filled {
+    color: #8b5cf6 !important;
+    font-weight: 700;
+    border-color: #8b5cf6 !important;
+}
+
+hr {
+    margin: 22px 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+@media (max-width: 1100px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
 </head>
-<body>
-    <div class="wrap">
-        <h1>Freight Extract Tools</h1>
-        <div class="intro">Vercel-ready version with drag and drop uploads, file size checking, upload progress, and clearer file previews.</div>
 
-        <div class="grid">
+<body>
+<div class="wrap">
+    <h1>Freight Extract Tools</h1>
+
+    <div class="layout">
+
+        <!-- LEFT COLUMN -->
+        <div class="column">
             <div class="card northline">
                 <div class="tool-label">Northline</div>
                 <h2>PDF Connote Extractor</h2>
-                <p>Upload one or more PDF manifest files and export just the connote numbers to Excel.</p>
 
-                <form method="post" action="/extract-pdf-connotes" enctype="multipart/form-data" class="processing-form" data-accept=".pdf">
-                    <input type="file" name="pdf_files" accept=".pdf" multiple required class="hidden-file-input">
+                <form class="processing-form" action="/extract-pdf-connotes" method="post" enctype="multipart/form-data">
+                    <input type="file" name="pdf_files" multiple>
 
-                    <div class="drop-zone">
-                        <div class="drop-zone-title">Drop PDF files here</div>
-                        <div class="drop-zone-subtitle">or click to browse</div>
-                    </div>
-
+                    <div class="drop-zone">Drop PDF files here</div>
                     <div class="selected-files"></div>
 
-                    <div class="checkbox-row">
-                        <label>
-                            <input type="checkbox" name="remove_duplicates">
-                            Remove duplicate connote numbers
-                        </label>
-                    </div>
+                    <label style="display:block; margin-top:12px;">
+                        <input type="checkbox" name="remove_duplicates"> Remove duplicates
+                    </label>
 
-                    <div class="button-row">
-                        <button type="submit">Extract PDF Connotes</button>
-                        <button type="button" class="secondary-button clear-files">Clear files</button>
-                    </div>
+                    <button type="submit">Extract PDF</button>
 
-                    <div class="progress-wrap">
-                        <div class="progress-track">
-                            <div class="progress-bar"></div>
-                        </div>
-                        <div class="progress-text">Starting upload...</div>
-                    </div>
-
+                    <div class="progress-wrap"><div class="progress-bar"></div></div>
                     <div class="status-message"></div>
                 </form>
             </div>
 
+            <div class="card cubic">
+                <div class="tool-label">Calculations</div>
+                <h2>Cubic Calculator</h2>
+
+                <label>Total Cubic</label>
+                <input id="cubicTotal" type="number" step="0.0001" class="calc-input" placeholder="e.g. 3.8592">
+
+                <label>Dimensions</label>
+                <div class="dim-grid">
+                    <input id="cubicA" type="number" step="0.0001" class="calc-input" placeholder="Length">
+                    <input id="cubicB" type="number" step="0.0001" class="calc-input" placeholder="Width">
+                    <input id="cubicC" type="number" step="0.0001" class="calc-input" placeholder="Height">
+                </div>
+
+                <div class="cubic-note">
+                    If you enter all 3 dimensions, Total Cubic is calculated automatically. If you enter Total Cubic and any 2 dimensions, the empty dimension box is filled automatically.
+                </div>
+
+                <label>Multiplier</label>
+                <input id="cubicMultiplier" type="number" step="0.0001" class="calc-input" placeholder="e.g. 333">
+
+                <button type="button" class="copy-btn-purple" id="clearCubicBtn">Clear Cubic Fields</button>
+
+                <div class="result-label">Cubic Weight</div>
+                <div class="result-row">
+                    <div class="result-value" id="cubicWeightResult">0.0000</div>
+                    <button type="button" class="copy-btn copy-btn-purple" id="copyCubicWeightBtn">Copy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE COLUMN -->
+        <div class="column">
             <div class="card airroad">
                 <div class="tool-label">Airroad Reverse Billing</div>
                 <h2>Amount / Comment Extractor</h2>
-                <p>Upload one or more Excel files and export only:</p>
-                <p><strong>Connote Code</strong>, <strong>Amount</strong>, and <strong>First Comment</strong>.</p>
-                <p class="note">Only rows with a value in the Amount column are included. Rows without a real connote code are ignored, which prevents totals or section rows being picked up.</p>
 
-                <form method="post" action="/extract-amount-comments" enctype="multipart/form-data" class="processing-form" data-accept=".xlsx,.xlsm">
-                    <input type="file" name="excel_files" accept=".xlsx,.xlsm" multiple required class="hidden-file-input">
+                <form class="processing-form" action="/extract-amount-comments" method="post" enctype="multipart/form-data">
+                    <input type="file" name="excel_files" multiple>
 
-                    <div class="drop-zone">
-                        <div class="drop-zone-title">Drop Excel files here</div>
-                        <div class="drop-zone-subtitle">or click to browse</div>
-                    </div>
-
+                    <div class="drop-zone">Drop Excel files here</div>
                     <div class="selected-files"></div>
 
-                    <div class="button-row">
-                        <button type="submit">Extract Amount / Comment Data</button>
-                        <button type="button" class="secondary-button clear-files">Clear files</button>
-                    </div>
+                    <button type="submit">Extract Excel</button>
 
-                    <div class="progress-wrap">
-                        <div class="progress-track">
-                            <div class="progress-bar"></div>
-                        </div>
-                        <div class="progress-text">Starting upload...</div>
-                    </div>
-
+                    <div class="progress-wrap"><div class="progress-bar"></div></div>
                     <div class="status-message"></div>
                 </form>
             </div>
         </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="column">
+            <div class="card calc">
+                <div class="tool-label">Calculations</div>
+                <h2>Fuel Calculator</h2>
+
+                <div class="percent-section">
+                    <div class="percent-section-title">Pinned favourites</div>
+                    <div class="percent-buttons" id="favoritePercentButtons"></div>
+                </div>
+
+                <div class="percent-section">
+                    <div class="percent-section-title">Recent / common percentages</div>
+                    <div class="percent-buttons" id="percentButtons"></div>
+                </div>
+
+                <div class="pin-row">
+                    <input type="number" id="favoritePercentInput" class="calc-input pin-input" step="0.01" placeholder="e.g. 49.07">
+                    <button type="button" class="pin-btn" id="addFavoriteBtn">Pin Favourite %</button>
+                </div>
+                <div class="small-note">Pinned percentages stay at the top. Right-click a pinned button to remove it.</div>
+
+                <label>Total Price</label>
+                <input id="totalPrice" type="number" step="0.01" class="calc-input" placeholder="e.g. 445.80">
+
+                <label>Fuel %</label>
+                <input id="fuelPercent" type="number" step="0.01" class="calc-input" placeholder="e.g. 49.07">
+
+                <div class="calc-result-row">
+                    <div class="calc-result">Base: <span id="baseResult">$0.00</span></div>
+                    <button type="button" class="copy-btn" id="copyBase">Copy</button>
+                </div>
+
+                <hr>
+
+                <label>Base Price</label>
+                <input id="basePrice" type="number" step="0.01" class="calc-input" placeholder="e.g. 299.10">
+
+                <label>Fuel %</label>
+                <input id="fuelPercentAdd" type="number" step="0.01" class="calc-input" placeholder="e.g. 49.07">
+
+                <div class="calc-result-row">
+                    <div class="calc-result">Total: <span id="totalResult">$0.00</span></div>
+                    <button type="button" class="copy-btn" id="copyTotal">Copy</button>
+                </div>
+
+                <div class="history-box">
+                    <div class="history-head">
+                        <div class="history-title">History</div>
+                        <button type="button" class="history-clear-btn" id="clearHistoryBtn">Clear History</button>
+                    </div>
+                    <div id="history" class="history"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
 
-    <script>
-        const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4 MB
-        const forms = document.querySelectorAll(".processing-form");
+<script>
+const MAX = 4 * 1024 * 1024;
 
-        function formatFileSize(bytes) {
-            if (bytes < 1024) return `${bytes} B`;
-            if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-            return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
-        }
+// =====================
+// FILE UPLOADS
+// =====================
+document.querySelectorAll(".processing-form").forEach(f => {
+    let input = f.querySelector("input[type=file]");
+    let drop = f.querySelector(".drop-zone");
+    let list = f.querySelector(".selected-files");
+    let wrap = f.querySelector(".progress-wrap");
+    let bar = f.querySelector(".progress-bar");
+    let status = f.querySelector(".status-message");
 
-        function setStatus(form, message, type) {
-            const status = form.querySelector(".status-message");
-            if (!status) return;
+    drop.onclick = () => input.click();
 
-            status.textContent = message || "";
-            status.className = "status-message";
+    drop.ondrop = e => {
+        e.preventDefault();
+        drop.classList.remove("dragover");
+        input.files = e.dataTransfer.files;
+        update();
+    };
 
-            if (type === "error") {
-                status.classList.add("status-error");
-            } else if (type === "success") {
-                status.classList.add("status-success");
-            } else if (type === "warning") {
-                status.classList.add("status-warning");
-            }
-        }
+    drop.ondragover = e => {
+        e.preventDefault();
+        drop.classList.add("dragover");
+    };
 
-        function setFormBusy(form, isBusy) {
-            const submitButton = form.querySelector('button[type="submit"]');
-            if (!submitButton) return;
+    drop.ondragleave = () => drop.classList.remove("dragover");
 
-            if (isBusy) {
-                submitButton.classList.add("hidden-submit");
-                submitButton.disabled = true;
-            } else {
-                submitButton.classList.remove("hidden-submit");
-                submitButton.disabled = false;
-            }
-        }
+    input.onchange = update;
 
-        function getFilenameFromDisposition(contentDisposition) {
-            if (!contentDisposition) return "extracted data.xlsx";
+    function update() {
+        list.innerHTML = "";
+        [...input.files].forEach(file => {
+            let d = document.createElement("div");
+            d.className = "file-pill";
+            if (file.size > MAX) d.classList.add("oversize");
+            d.innerHTML = `<span>${file.name}</span><span>${(file.size / 1024 / 1024).toFixed(2)}MB</span>`;
+            list.appendChild(d);
+        });
+    }
 
-            const utf8Match = contentDisposition.match(/filename\*=UTF-8''([^;]+)/i);
-            if (utf8Match && utf8Match[1]) {
-                return decodeURIComponent(utf8Match[1]);
-            }
+    f.onsubmit = e => {
+        e.preventDefault();
 
-            const asciiMatch = contentDisposition.match(/filename="([^"]+)"/i);
-            if (asciiMatch && asciiMatch[1]) {
-                return asciiMatch[1];
-            }
-
-            return "extracted data.xlsx";
-        }
-
-        function getExtractedRows(response) {
-            const value = response.getResponseHeader("X-Extracted-Rows");
-            if (!value) return null;
-            const count = parseInt(value, 10);
-            return Number.isNaN(count) ? null : count;
-        }
-
-        function updateProgress(form, percent, text) {
-            const wrap = form.querySelector(".progress-wrap");
-            const bar = form.querySelector(".progress-bar");
-            const label = form.querySelector(".progress-text");
-
-            if (!wrap || !bar || !label) return;
-
-            wrap.style.display = "block";
-            bar.style.width = `${Math.max(0, Math.min(100, percent))}%`;
-            label.textContent = text;
-        }
-
-        function resetProgress(form) {
-            const wrap = form.querySelector(".progress-wrap");
-            const bar = form.querySelector(".progress-bar");
-            const label = form.querySelector(".progress-text");
-
-            if (!wrap || !bar || !label) return;
-
-            wrap.style.display = "none";
-            bar.style.width = "0%";
-            label.textContent = "Starting upload...";
-        }
-
-        function validateFiles(form, files) {
-            if (!files || files.length === 0) {
-                return { ok: false, message: "Please choose at least one file." };
-            }
-
-            for (const file of files) {
-                if (file.size > MAX_FILE_SIZE) {
-                    return {
-                        ok: false,
-                        message: `File "${file.name}" is ${formatFileSize(file.size)}. Maximum allowed is 4.00 MB.`
-                    };
-                }
-            }
-
-            return { ok: true };
-        }
-
-        function updateFileList(form) {
-            const fileInput = form.querySelector('input[type="file"]');
-            const list = form.querySelector(".selected-files");
-            if (!fileInput || !list) return;
-
-            list.innerHTML = "";
-
-            const files = Array.from(fileInput.files || []);
-            if (!files.length) return;
-
-            files.forEach(file => {
-                const item = document.createElement("div");
-                item.className = "file-pill";
-                if (file.size > MAX_FILE_SIZE) {
-                    item.classList.add("oversize");
-                }
-
-                const name = document.createElement("div");
-                name.className = "file-name";
-                name.textContent = file.name;
-
-                const meta = document.createElement("div");
-                meta.className = "file-meta";
-                meta.textContent = file.size > MAX_FILE_SIZE
-                    ? `${formatFileSize(file.size)} · too large`
-                    : formatFileSize(file.size);
-
-                item.appendChild(name);
-                item.appendChild(meta);
-                list.appendChild(item);
-            });
-
-            const validation = validateFiles(form, files);
-            if (!validation.ok) {
-                setStatus(form, validation.message, "error");
-            } else {
-                setStatus(form, "", "");
-            }
-        }
-
-        function wireDropZone(form) {
-            const fileInput = form.querySelector('input[type="file"]');
-            const dropZone = form.querySelector(".drop-zone");
-            const clearButton = form.querySelector(".clear-files");
-            const accepted = (form.dataset.accept || "").split(",").map(v => v.trim().toLowerCase()).filter(Boolean);
-
-            if (!fileInput || !dropZone) return;
-
-            dropZone.addEventListener("click", () => fileInput.click());
-
-            fileInput.addEventListener("change", () => {
-                updateFileList(form);
-            });
-
-            ["dragenter", "dragover"].forEach(eventName => {
-                dropZone.addEventListener(eventName, (event) => {
-                    event.preventDefault();
-                    dropZone.classList.add("dragover");
-                });
-            });
-
-            ["dragleave", "drop"].forEach(eventName => {
-                dropZone.addEventListener(eventName, (event) => {
-                    event.preventDefault();
-                    dropZone.classList.remove("dragover");
-                });
-            });
-
-            dropZone.addEventListener("drop", (event) => {
-                const dropped = Array.from(event.dataTransfer.files || []);
-                if (!dropped.length) return;
-
-                const filtered = dropped.filter(file => {
-                    const lower = file.name.toLowerCase();
-                    return accepted.some(ext => lower.endsWith(ext));
-                });
-
-                const dt = new DataTransfer();
-                filtered.forEach(file => dt.items.add(file));
-                fileInput.files = dt.files;
-                updateFileList(form);
-
-                if (filtered.length !== dropped.length) {
-                    setStatus(form, "Some files were ignored because they were the wrong file type.", "warning");
-                }
-            });
-
-            if (clearButton) {
-                clearButton.addEventListener("click", () => {
-                    fileInput.value = "";
-                    updateFileList(form);
-                    resetProgress(form);
-                    setStatus(form, "", "");
-                });
-            }
-        }
-
-        function downloadBlob(blob, filename) {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            window.URL.revokeObjectURL(url);
-        }
-
-        function submitWithProgress(form) {
-            const fileInput = form.querySelector('input[type="file"]');
-            const files = Array.from(fileInput.files || []);
-            const validation = validateFiles(form, files);
-
-            if (!validation.ok) {
-                setStatus(form, validation.message, "error");
+        for (let file of input.files) {
+            if (file.size > MAX) {
+                status.textContent = `File too big: ${file.name}`;
+                status.className = "status-message status-error";
                 return;
             }
-
-            setFormBusy(form, true);
-            setStatus(form, "", "");
-            updateProgress(form, 0, "Preparing upload...");
-
-            const formData = new FormData(form);
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", form.action, true);
-            xhr.responseType = "blob";
-
-            xhr.upload.onprogress = (event) => {
-                if (event.lengthComputable) {
-                    const percent = Math.round((event.loaded / event.total) * 100);
-                    updateProgress(form, percent, `Uploading... ${percent}%`);
-                } else {
-                    updateProgress(form, 30, "Uploading...");
-                }
-            };
-
-            xhr.onloadstart = () => {
-                updateProgress(form, 2, "Starting upload...");
-            };
-
-            xhr.onload = () => {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    updateProgress(form, 100, "Finishing download...");
-                    const filename = getFilenameFromDisposition(xhr.getResponseHeader("Content-Disposition"));
-                    downloadBlob(xhr.response, filename);
-
-                    const rowCount = getExtractedRows(xhr);
-                    if (rowCount === null) {
-                        setStatus(form, "✔ File extracted successfully", "success");
-                    } else {
-                        const label = rowCount === 1 ? "record" : "records";
-                        setStatus(form, `✔ File extracted successfully (${rowCount} ${label})`, "success");
-                    }
-                } else {
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                        setStatus(form, reader.result || "Processing failed.", "error");
-                    };
-                    reader.onerror = () => {
-                        setStatus(form, "Processing failed.", "error");
-                    };
-                    reader.readAsText(xhr.response);
-                }
-
-                setFormBusy(form, false);
-                resetProgress(form);
-            };
-
-            xhr.onerror = () => {
-                setStatus(form, "Network error while uploading the file.", "error");
-                setFormBusy(form, false);
-                resetProgress(form);
-            };
-
-            xhr.send(formData);
         }
 
-        forms.forEach(form => {
-            wireDropZone(form);
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", f.action);
+        xhr.responseType = "blob";
 
-            form.addEventListener("submit", (event) => {
-                event.preventDefault();
-                submitWithProgress(form);
-            });
-        });
-    </script>
+        wrap.style.display = "block";
+        status.textContent = "";
+        status.className = "status-message";
+
+        xhr.upload.onprogress = e => {
+            if (e.lengthComputable) {
+                bar.style.width = (e.loaded / e.total * 100) + "%";
+            }
+        };
+
+        xhr.onload = () => {
+            wrap.style.display = "none";
+            bar.style.width = "0%";
+
+            if (xhr.status >= 200 && xhr.status < 300) {
+                let url = URL.createObjectURL(xhr.response);
+                let a = document.createElement("a");
+
+                let name = "file.xlsx";
+                let h = xhr.getResponseHeader("Content-Disposition");
+                if (h) {
+                    let utf = h.match(/filename\*=UTF-8''([^;]+)/);
+                    let normal = h.match(/filename="([^"]+)"/);
+                    if (utf && utf[1]) {
+                        name = decodeURIComponent(utf[1]);
+                    } else if (normal && normal[1]) {
+                        name = normal[1];
+                    }
+                }
+
+                a.href = url;
+                a.download = name;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+
+                status.textContent = "✔ File extracted successfully";
+                status.className = "status-message status-success";
+            } else {
+                status.textContent = "Something went wrong while extracting the file.";
+                status.className = "status-message status-error";
+            }
+        };
+
+        xhr.onerror = () => {
+            wrap.style.display = "none";
+            bar.style.width = "0%";
+            status.textContent = "Upload failed.";
+            status.className = "status-message status-error";
+        };
+
+        xhr.send(new FormData(f));
+    };
+});
+
+// =====================
+// FUEL CALCULATOR
+// =====================
+const DEFAULT_PERCENTS = [30, 48, 49.07, 50];
+const MAX_RECENTS = 5;
+const MAX_HISTORY = 30;
+
+const totalPrice = document.getElementById("totalPrice");
+const fuelPercent = document.getElementById("fuelPercent");
+const baseResult = document.getElementById("baseResult");
+
+const basePrice = document.getElementById("basePrice");
+const fuelPercentAdd = document.getElementById("fuelPercentAdd");
+const totalResult = document.getElementById("totalResult");
+
+const copyBase = document.getElementById("copyBase");
+const copyTotal = document.getElementById("copyTotal");
+
+const historyBox = document.getElementById("history");
+const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+
+const percentButtons = document.getElementById("percentButtons");
+const favoritePercentButtons = document.getElementById("favoritePercentButtons");
+const favoritePercentInput = document.getElementById("favoritePercentInput");
+const addFavoriteBtn = document.getElementById("addFavoriteBtn");
+
+function formatCurrency(v) {
+    if (isNaN(v)) return "$0.00";
+    return "$" + Number(v).toFixed(2);
+}
+
+function formatPercentValue(v) {
+    return Number(v).toString();
+}
+
+function getRecentPercents() {
+    return JSON.parse(localStorage.getItem("recentFuelPercents") || "[]");
+}
+
+function setRecentPercents(list) {
+    localStorage.setItem("recentFuelPercents", JSON.stringify(list));
+}
+
+function saveRecentPercent(p) {
+    if (isNaN(p)) return;
+    let value = Number(p);
+    let list = getRecentPercents().filter(x => Number(x) !== value);
+    list.unshift(value);
+    list = list.slice(0, MAX_RECENTS);
+    setRecentPercents(list);
+    renderPercentButtons();
+}
+
+function getFavoritePercents() {
+    return JSON.parse(localStorage.getItem("favoriteFuelPercents") || "[]");
+}
+
+function setFavoritePercents(list) {
+    localStorage.setItem("favoriteFuelPercents", JSON.stringify(list));
+}
+
+function addFavoritePercent(p) {
+    if (isNaN(p)) return;
+    let value = Number(p);
+    let list = getFavoritePercents();
+    if (!list.some(x => Number(x) === value)) {
+        list.push(value);
+        setFavoritePercents(list);
+    }
+    renderPercentButtons();
+}
+
+function removeFavoritePercent(p) {
+    let value = Number(p);
+    let list = getFavoritePercents().filter(x => Number(x) !== value);
+    setFavoritePercents(list);
+    renderPercentButtons();
+}
+
+function applyPercent(p) {
+    const value = Number(p);
+    fuelPercent.value = value;
+    fuelPercentAdd.value = value;
+    saveRecentPercent(value);
+    calcBase(false);
+    calcTotal(false);
+}
+
+function makePercentButton(p, isFavorite = false) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "percent-btn" + (isFavorite ? " favorite" : "");
+    btn.textContent = `${formatPercentValue(p)}%`;
+    btn.onclick = () => applyPercent(p);
+
+    if (isFavorite) {
+        btn.title = "Click to use. Right-click to remove from favourites.";
+        btn.oncontextmenu = (e) => {
+            e.preventDefault();
+            removeFavoritePercent(p);
+        };
+    }
+    return btn;
+}
+
+function renderPercentButtons() {
+    percentButtons.innerHTML = "";
+    favoritePercentButtons.innerHTML = "";
+
+    const favorites = getFavoritePercents();
+    const recents = getRecentPercents();
+    const recentAndDefault = [...recents, ...DEFAULT_PERCENTS];
+    const uniqueRecent = [...new Set(recentAndDefault.map(Number))]
+        .filter(p => !favorites.map(Number).includes(Number(p)));
+
+    if (favorites.length === 0) {
+        favoritePercentButtons.innerHTML = `<div class="history-empty">No pinned favourites yet.</div>`;
+    } else {
+        favorites.forEach(p => favoritePercentButtons.appendChild(makePercentButton(p, true)));
+    }
+
+    uniqueRecent.forEach(p => percentButtons.appendChild(makePercentButton(p, false)));
+}
+
+function getHistory() {
+    return JSON.parse(localStorage.getItem("fuelCalcHistory") || "[]");
+}
+
+function setHistory(list) {
+    localStorage.setItem("fuelCalcHistory", JSON.stringify(list));
+}
+
+function renderHistory() {
+    const items = getHistory();
+    historyBox.innerHTML = "";
+
+    if (items.length === 0) {
+        historyBox.innerHTML = `<div class="history-empty">No calculations yet.</div>`;
+        return;
+    }
+
+    items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "history-item";
+
+        if (item.type === "remove") {
+            div.innerHTML = `<strong>Remove fuel</strong><br>Total ${formatCurrency(item.input)} @ ${item.percent}% = Base ${formatCurrency(item.result)}`;
+        } else {
+            div.innerHTML = `<strong>Add fuel</strong><br>Base ${formatCurrency(item.input)} @ ${item.percent}% = Total ${formatCurrency(item.result)}`;
+        }
+
+        historyBox.appendChild(div);
+    });
+}
+
+function addHistory(type, input, percent, result) {
+    if ([input, percent, result].some(v => isNaN(v))) return;
+
+    const entry = {
+        type,
+        input: Number(input),
+        percent: Number(percent),
+        result: Number(result),
+        stamp: Date.now()
+    };
+
+    let list = getHistory();
+
+    const duplicate = list[0] &&
+        list[0].type === entry.type &&
+        Number(list[0].input) === entry.input &&
+        Number(list[0].percent) === entry.percent &&
+        Number(list[0].result) === entry.result;
+
+    if (!duplicate) {
+        list.unshift(entry);
+        list = list.slice(0, MAX_HISTORY);
+        setHistory(list);
+        renderHistory();
+    }
+}
+
+function calcBase(addToHistory = false) {
+    let t = parseFloat(totalPrice.value);
+    let p = parseFloat(fuelPercent.value);
+
+    if (!isNaN(t) && !isNaN(p)) {
+        let r = t / (1 + p / 100);
+        baseResult.textContent = formatCurrency(r);
+
+        if (addToHistory) {
+            saveRecentPercent(p);
+            addHistory("remove", t, p, r);
+        }
+    } else {
+        baseResult.textContent = "$0.00";
+    }
+}
+
+function calcTotal(addToHistory = false) {
+    let b = parseFloat(basePrice.value);
+    let p = parseFloat(fuelPercentAdd.value);
+
+    if (!isNaN(b) && !isNaN(p)) {
+        let r = b * (1 + p / 100);
+        totalResult.textContent = formatCurrency(r);
+
+        if (addToHistory) {
+            saveRecentPercent(p);
+            addHistory("add", b, p, r);
+        }
+    } else {
+        totalResult.textContent = "$0.00";
+    }
+}
+
+totalPrice.addEventListener("input", () => calcBase(false));
+fuelPercent.addEventListener("input", () => calcBase(false));
+basePrice.addEventListener("input", () => calcTotal(false));
+fuelPercentAdd.addEventListener("input", () => calcTotal(false));
+
+totalPrice.addEventListener("change", () => calcBase(true));
+fuelPercent.addEventListener("change", () => calcBase(true));
+basePrice.addEventListener("change", () => calcTotal(true));
+fuelPercentAdd.addEventListener("change", () => calcTotal(true));
+
+copyBase.onclick = async () => {
+    try {
+        await navigator.clipboard.writeText(baseResult.textContent);
+        const original = copyBase.textContent;
+        copyBase.textContent = "Copied";
+        setTimeout(() => copyBase.textContent = original, 1000);
+    } catch {
+        alert("Could not copy");
+    }
+};
+
+copyTotal.onclick = async () => {
+    try {
+        await navigator.clipboard.writeText(totalResult.textContent);
+        const original = copyTotal.textContent;
+        copyTotal.textContent = "Copied";
+        setTimeout(() => copyTotal.textContent = original, 1000);
+    } catch {
+        alert("Could not copy");
+    }
+};
+
+addFavoriteBtn.onclick = () => {
+    const value = parseFloat(favoritePercentInput.value);
+    if (isNaN(value)) return;
+    addFavoritePercent(value);
+    favoritePercentInput.value = "";
+};
+
+clearHistoryBtn.onclick = () => {
+    localStorage.removeItem("fuelCalcHistory");
+    renderHistory();
+};
+
+favoritePercentInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        addFavoriteBtn.click();
+    }
+});
+
+// =====================
+// CUBIC CALCULATOR
+// =====================
+const cubicTotal = document.getElementById("cubicTotal");
+const cubicA = document.getElementById("cubicA");
+const cubicB = document.getElementById("cubicB");
+const cubicC = document.getElementById("cubicC");
+const cubicMultiplier = document.getElementById("cubicMultiplier");
+const cubicWeightResult = document.getElementById("cubicWeightResult");
+const clearCubicBtn = document.getElementById("clearCubicBtn");
+
+function clearAutoFilledStyles() {
+    [cubicTotal, cubicA, cubicB, cubicC].forEach(el => el.classList.remove("auto-filled"));
+}
+
+function parseInputValue(el) {
+    const value = el.value.trim();
+    if (value === "") return null;
+    const num = parseFloat(value);
+    return Number.isNaN(num) ? null : num;
+}
+
+function calculateCubic() {
+    clearAutoFilledStyles();
+
+    const total = parseInputValue(cubicTotal);
+    const a = parseInputValue(cubicA);
+    const b = parseInputValue(cubicB);
+    const c = parseInputValue(cubicC);
+    const multiplier = parseInputValue(cubicMultiplier);
+
+    const dims = [a, b, c];
+    const filledCount = dims.filter(v => v !== null && v > 0).length;
+
+    if (filledCount === 3) {
+        const calculatedTotal = a * b * c;
+        cubicTotal.value = calculatedTotal.toFixed(4);
+        cubicTotal.classList.add("auto-filled");
+    }
+
+    const currentTotal = parseInputValue(cubicTotal);
+    if (currentTotal !== null && currentTotal > 0) {
+        if (a !== null && b !== null && (c === null || cubicC.value.trim() === "")) {
+            const result = currentTotal / (a * b);
+            if (isFinite(result)) {
+                cubicC.value = result.toFixed(4);
+                cubicC.classList.add("auto-filled");
+            }
+        } else if (a !== null && c !== null && (b === null || cubicB.value.trim() === "")) {
+            const result = currentTotal / (a * c);
+            if (isFinite(result)) {
+                cubicB.value = result.toFixed(4);
+                cubicB.classList.add("auto-filled");
+            }
+        } else if (b !== null && c !== null && (a === null || cubicA.value.trim() === "")) {
+            const result = currentTotal / (b * c);
+            if (isFinite(result)) {
+                cubicA.value = result.toFixed(4);
+                cubicA.classList.add("auto-filled");
+            }
+        }
+    }
+
+    const finalTotal = parseInputValue(cubicTotal);
+    if (finalTotal !== null && multiplier !== null && multiplier > 0) {
+        cubicWeightResult.textContent = (finalTotal * multiplier).toFixed(4);
+    } else {
+        cubicWeightResult.textContent = "0.0000";
+    }
+}
+
+[cubicTotal, cubicA, cubicB, cubicC, cubicMultiplier].forEach(el => {
+    el.addEventListener("input", calculateCubic);
+});
+
+clearCubicBtn.addEventListener("click", () => {
+    cubicTotal.value = "";
+    cubicA.value = "";
+    cubicB.value = "";
+    cubicC.value = "";
+    cubicMultiplier.value = "";
+    cubicWeightResult.textContent = "0.0000";
+    clearAutoFilledStyles();
+});
+
+document.getElementById("copyCubicWeightBtn").addEventListener("click", async () => {
+    try {
+        await navigator.clipboard.writeText(cubicWeightResult.textContent);
+        const btn = document.getElementById("copyCubicWeightBtn");
+        const old = btn.textContent;
+        btn.textContent = "Copied";
+        setTimeout(() => btn.textContent = old, 1000);
+    } catch {
+        alert("Could not copy");
+    }
+});
+
+renderPercentButtons();
+renderHistory();
+calculateCubic();
+</script>
 </body>
 </html>
