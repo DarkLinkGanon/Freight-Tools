@@ -334,6 +334,38 @@ button:hover {
     border-color: #8b5cf6 !important;
 }
 
+.cubic-top-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cubic-total-input {
+    flex: 1;
+    min-width: 0;
+}
+
+.clear-cubic-btn {
+    background: #6b7280;
+    white-space: nowrap;
+    margin-top: 5px;
+}
+
+.clear-cubic-btn:hover {
+    background: #4b5563;
+}
+
+#calculateCubicBtn {
+    white-space: nowrap;
+    margin-top: 5px;
+    background: #8b5cf6;
+}
+
+#calculateCubicBtn:hover {
+    background: #7c3aed;
+}
+
 hr {
     margin: 22px 0;
     border: none;
@@ -344,27 +376,6 @@ hr {
     .layout {
         grid-template-columns: 1fr;
     }
-.cubic-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.cubic-total-input {
-    flex: 1;           /* makes input shrink to fit */
-    min-width: 0;
-}
-
-.clear-cubic-btn {
-    background: #8b5cf6;
-    white-space: nowrap;
-    padding: 8px 12px;
-    margin-top: 5px;   /* aligns nicely with input */
-}
-
-.clear-cubic-btn:hover {
-    background: #7c3aed;
-}
 }
 </style>
 </head>
@@ -375,7 +386,6 @@ hr {
 
     <div class="layout">
 
-        <!-- LEFT COLUMN -->
         <div class="column">
             <div class="card northline">
                 <div class="tool-label">Northline</div>
@@ -403,13 +413,11 @@ hr {
                 <h2>Cubic Calculator</h2>
 
                 <label>Total Cubic</label>
-			<div class="cubic-row">
-    			<input id="cubicTotal" type="number" step="0.0001" class="calc-input cubic-total-input" placeholder="e.g. 3.8592">
-
-    			<button type="button" id="clearCubicBtn" class="clear-cubic-btn">
-        			Clear
-    			</button>
-			</div>
+                <div class="cubic-top-row">
+                    <input id="cubicTotal" type="number" step="0.0001" class="calc-input cubic-total-input" placeholder="e.g. 3.8592">
+                    <button type="button" id="calculateCubicBtn" class="copy-btn-purple">Calculate</button>
+                    <button type="button" id="clearCubicBtn" class="clear-cubic-btn">Clear</button>
+                </div>
 
                 <label>Dimensions</label>
                 <div class="dim-grid">
@@ -419,7 +427,7 @@ hr {
                 </div>
 
                 <div class="cubic-note">
-                    If you enter all 3 dimensions, Total Cubic is calculated automatically. If you enter Total Cubic and any 2 dimensions, the empty dimension box is filled automatically.
+                    Enter any 3 of the 4 boxes, then click Calculate to work out the missing one.
                 </div>
 
                 <label>Multiplier</label>
@@ -433,7 +441,6 @@ hr {
             </div>
         </div>
 
-        <!-- MIDDLE COLUMN -->
         <div class="column">
             <div class="card airroad">
                 <div class="tool-label">Airroad Reverse Billing</div>
@@ -453,7 +460,6 @@ hr {
             </div>
         </div>
 
-        <!-- RIGHT COLUMN -->
         <div class="column">
             <div class="card calc">
                 <div class="tool-label">Calculations</div>
@@ -515,9 +521,6 @@ hr {
 <script>
 const MAX = 4 * 1024 * 1024;
 
-// =====================
-// FILE UPLOADS
-// =====================
 document.querySelectorAll(".processing-form").forEach(f => {
     let input = f.querySelector("input[type=file]");
     let drop = f.querySelector(".drop-zone");
@@ -626,9 +629,6 @@ document.querySelectorAll(".processing-form").forEach(f => {
     };
 });
 
-// =====================
-// FUEL CALCULATOR
-// =====================
 const DEFAULT_PERCENTS = [30, 48, 49.07, 50];
 const MAX_RECENTS = 5;
 const MAX_HISTORY = 30;
@@ -893,9 +893,6 @@ favoritePercentInput.addEventListener("keydown", (e) => {
     }
 });
 
-// =====================
-// CUBIC CALCULATOR
-// =====================
 const cubicTotal = document.getElementById("cubicTotal");
 const cubicA = document.getElementById("cubicA");
 const cubicB = document.getElementById("cubicB");
@@ -903,6 +900,7 @@ const cubicC = document.getElementById("cubicC");
 const cubicMultiplier = document.getElementById("cubicMultiplier");
 const cubicWeightResult = document.getElementById("cubicWeightResult");
 const clearCubicBtn = document.getElementById("clearCubicBtn");
+const calculateCubicBtn = document.getElementById("calculateCubicBtn");
 
 function clearAutoFilledStyles() {
     [cubicTotal, cubicA, cubicB, cubicC].forEach(el => el.classList.remove("auto-filled"));
@@ -915,6 +913,17 @@ function parseInputValue(el) {
     return Number.isNaN(num) ? null : num;
 }
 
+function updateCubicWeight() {
+    const total = parseInputValue(cubicTotal);
+    const multiplier = parseInputValue(cubicMultiplier);
+
+    if (total !== null && multiplier !== null && multiplier > 0) {
+        cubicWeightResult.textContent = (total * multiplier).toFixed(4);
+    } else {
+        cubicWeightResult.textContent = "0.0000";
+    }
+}
+
 function calculateCubic() {
     clearAutoFilledStyles();
 
@@ -922,51 +931,48 @@ function calculateCubic() {
     const a = parseInputValue(cubicA);
     const b = parseInputValue(cubicB);
     const c = parseInputValue(cubicC);
-    const multiplier = parseInputValue(cubicMultiplier);
 
-    const dims = [a, b, c];
-    const filledCount = dims.filter(v => v !== null && v > 0).length;
+    const fields = [
+        { key: "total", el: cubicTotal, value: total },
+        { key: "a", el: cubicA, value: a },
+        { key: "b", el: cubicB, value: b },
+        { key: "c", el: cubicC, value: c }
+    ];
 
-    if (filledCount === 3) {
-        const calculatedTotal = a * b * c;
-        cubicTotal.value = calculatedTotal.toFixed(4);
-        cubicTotal.classList.add("auto-filled");
+    const filled = fields.filter(f => f.value !== null);
+    const empty = fields.filter(f => f.value === null);
+
+    if (filled.length !== 3 || empty.length !== 1) {
+        updateCubicWeight();
+        return;
     }
 
-    const currentTotal = parseInputValue(cubicTotal);
-    if (currentTotal !== null && currentTotal > 0) {
-        if (a !== null && b !== null && (c === null || cubicC.value.trim() === "")) {
-            const result = currentTotal / (a * b);
-            if (isFinite(result)) {
-                cubicC.value = result.toFixed(4);
-                cubicC.classList.add("auto-filled");
-            }
-        } else if (a !== null && c !== null && (b === null || cubicB.value.trim() === "")) {
-            const result = currentTotal / (a * c);
-            if (isFinite(result)) {
-                cubicB.value = result.toFixed(4);
-                cubicB.classList.add("auto-filled");
-            }
-        } else if (b !== null && c !== null && (a === null || cubicA.value.trim() === "")) {
-            const result = currentTotal / (b * c);
-            if (isFinite(result)) {
-                cubicA.value = result.toFixed(4);
-                cubicA.classList.add("auto-filled");
-            }
-        }
+    const missing = empty[0];
+    let result = null;
+
+    if (missing.key === "total") {
+        if (a > 0 && b > 0 && c > 0) result = a * b * c;
+    } else if (missing.key === "a") {
+        if (total > 0 && b > 0 && c > 0) result = total / (b * c);
+    } else if (missing.key === "b") {
+        if (total > 0 && a > 0 && c > 0) result = total / (a * c);
+    } else if (missing.key === "c") {
+        if (total > 0 && a > 0 && b > 0) result = total / (a * b);
     }
 
-    const finalTotal = parseInputValue(cubicTotal);
-    if (finalTotal !== null && multiplier !== null && multiplier > 0) {
-        cubicWeightResult.textContent = (finalTotal * multiplier).toFixed(4);
-    } else {
-        cubicWeightResult.textContent = "0.0000";
+    if (result !== null && isFinite(result)) {
+        missing.el.value = Number(result).toFixed(4);
+        missing.el.classList.add("auto-filled");
     }
+
+    updateCubicWeight();
 }
 
 [cubicTotal, cubicA, cubicB, cubicC, cubicMultiplier].forEach(el => {
-    el.addEventListener("input", calculateCubic);
+    el.addEventListener("input", updateCubicWeight);
 });
+
+calculateCubicBtn.addEventListener("click", calculateCubic);
 
 clearCubicBtn.addEventListener("click", () => {
     cubicTotal.value = "";
@@ -992,7 +998,7 @@ document.getElementById("copyCubicWeightBtn").addEventListener("click", async ()
 
 renderPercentButtons();
 renderHistory();
-calculateCubic();
+updateCubicWeight();
 </script>
 </body>
 </html>
