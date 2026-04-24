@@ -11,12 +11,6 @@ app = Flask(__name__)
 
 
 def safe_numeric_eval(formula_text):
-    """
-    Small fallback for simple formulas like:
-    =16.61+22.98
-    =68.58*2
-    =75.27+0.273*30+22.98
-    """
     if not isinstance(formula_text, str):
         return formula_text
 
@@ -40,11 +34,19 @@ def make_output_filename(original_filename, suffix=" extracted data", new_extens
     return f"{base_name}{suffix}{new_extension}"
 
 
+def save_uploaded_file(file_storage, suffix):
+    safe_name = secure_filename(file_storage.filename or "upload")
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix, prefix="upload_") as tmp:
+        file_storage.save(tmp.name)
+        return tmp.name, safe_name
+
+
 def extract_connotes_from_pdf(filepath):
-    connotes = []
+    rows = []
 
     with pdfplumber.open(filepath) as pdf:
         full_text = ""
+
         for page in pdf.pages:
             page_text = page.extract_text() or ""
             full_text += page_text + "\n"
@@ -66,12 +68,20 @@ def extract_connotes_from_pdf(filepath):
                     continue
 
                 parts = line.split()
-                if len(parts) >= 2:
-                    connote = parts[1].strip()
-                    if re.fullmatch(r"[A-Z0-9]{6,20}", connote):
-                        connotes.append(connote)
 
-    return connotes
+                # Expected Northline row ending:
+                # ... TotalItems Weight Cubic $TotalCost
+                if len(parts) >= 5:
+                    connote = parts[1].strip()
+                    cubic = parts[-2].replace(",", "").strip()
+
+                    if re.fullmatch(r"[A-Z0-9]{6,25}", connote) and re.fullmatch(r"\d+(\.\d+)?", cubic):
+                        rows.append({
+                            "connote": connote,
+                            "cubic": cubic
+                        })
+
+    return rows
 
 
 def normalize_header(text):
@@ -164,13 +174,6 @@ def extract_amount_rows_from_excel(filepath):
     return extracted_rows
 
 
-def save_uploaded_file(file_storage, suffix):
-    safe_name = secure_filename(file_storage.filename or "upload")
-    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix, prefix="upload_") as tmp:
-        file_storage.save(tmp.name)
-        return tmp.name, safe_name
-
-
 @app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
@@ -181,7 +184,7 @@ def extract_pdf_connotes():
     files = request.files.getlist("pdf_files")
     remove_duplicates = request.form.get("remove_duplicates") == "on"
 
-    all_connotes = []
+    all_rows = []
     original_names = []
 
     for file in files:
@@ -190,30 +193,32 @@ def extract_pdf_connotes():
             temp_path, _ = save_uploaded_file(file, ".pdf")
 
             try:
-                connotes = extract_connotes_from_pdf(temp_path)
-                all_connotes.extend(connotes)
+                rows = extract_connotes_from_pdf(temp_path)
+                all_rows.extend(rows)
             finally:
                 try:
                     os.remove(temp_path)
                 except Exception:
                     pass
 
+    if remove_duplicates:
+        seen = set()
+        unique_rows = []
+
+        for row in all_rows:
+            if row["connote"] not in seen:
+                seen.add(row["connote"])
+                unique_rows.append(row)
+
+        all_rows = unique_rows
+
     wb = Workbook()
     ws = wb.active
     ws.title = "Connotes"
-    ws.append(["Connote Number"])
+    ws.append(["Connote Number", "Cubic"])
 
-    if remove_duplicates:
-        seen = set()
-        ordered_connotes = []
-        for connote in all_connotes:
-            if connote not in seen:
-                seen.add(connote)
-                ordered_connotes.append(connote)
-        all_connotes = ordered_connotes
-
-    for connote in all_connotes:
-        ws.append([connote])
+    for row in all_rows:
+        ws.append([row["connote"], row["cubic"]])
 
     output = BytesIO()
     wb.save(output)
@@ -230,7 +235,8 @@ def extract_pdf_connotes():
         download_name=download_name,
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ))
-    response.headers["X-Extracted-Rows"] = str(len(all_connotes))
+
+    response.headers["X-Extracted-Rows"] = str(len(all_rows))
     return response
 
 
@@ -243,9 +249,11 @@ def extract_amount_comments():
     for file in files:
         if file and file.filename:
             filename_lower = file.filename.lower()
+
             if filename_lower.endswith(".xlsx") or filename_lower.endswith(".xlsm"):
                 original_names.append(file.filename)
-                temp_path, _ = save_uploaded_file(file, os.path.splitext(file.filename)[1] or ".xlsx")
+                suffix = os.path.splitext(file.filename)[1] or ".xlsx"
+                temp_path, _ = save_uploaded_file(file, suffix)
 
                 try:
                     rows = extract_amount_rows_from_excel(temp_path)
@@ -282,6 +290,7 @@ def extract_amount_comments():
         download_name=download_name,
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ))
+
     response.headers["X-Extracted-Rows"] = str(len(all_rows))
     return response
 
