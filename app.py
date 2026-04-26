@@ -75,7 +75,7 @@ def extract_connotes_from_pdf(filepath):
                     connote = parts[1].strip()
                     cubic = parts[-2].replace(",", "").strip()
 
-                    if re.fullmatch(r"[A-Z0-9]{6,25}", connote) and re.fullmatch(r"\d+(\.\d+)?", cubic):
+                    if re.fullmatch(r"[A-Z0-9\-]{6,30}", connote) and re.fullmatch(r"\d+(\.\d+)?", cubic):
                         rows.append({
                             "connote": connote,
                             "cubic": cubic
