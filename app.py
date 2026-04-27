@@ -69,24 +69,27 @@ def extract_connotes_from_pdf(filepath):
 
                 parts = line.split()
 
-                # Expected row:
+                # Expected Northline row ending:
                 # ... TotalItems Weight Cubic $TotalCost
                 if len(parts) >= 5:
                     connote = parts[1].strip()
                     weight = parts[-3].replace(",", "").strip()
                     raw_cubic = parts[-2].replace(",", "").strip()
+                    total_cost = parts[-1].replace("$", "").replace(",", "").strip()
 
                     if (
                         re.fullmatch(r"[A-Z0-9\-]{6,30}", connote)
                         and re.fullmatch(r"\d+(\.\d+)?", weight)
                         and re.fullmatch(r"\d+(\.\d+)?", raw_cubic)
+                        and re.fullmatch(r"\d+(\.\d+)?", total_cost)
                     ):
                         cubic_weight = float(raw_cubic) * 250
 
                         rows.append({
                             "connote": connote,
                             "weight": float(weight),
-                            "cubic": cubic_weight
+                            "cubic": cubic_weight,
+                            "total_cost": float(total_cost)
                         })
 
     return rows
@@ -191,6 +194,12 @@ def index():
 def extract_pdf_connotes():
     files = request.files.getlist("pdf_files")
     remove_duplicates = request.form.get("remove_duplicates") == "on"
+    include_cost_report = request.form.get("include_cost_report") == "on"
+
+    try:
+        fuel_percent = float(request.form.get("fuel_surcharge_percent") or 0)
+    except ValueError:
+        fuel_percent = 0
 
     all_rows = []
     original_names = []
@@ -212,29 +221,41 @@ def extract_pdf_connotes():
     if remove_duplicates:
         seen = set()
         unique_rows = []
-
         for row in all_rows:
             if row["connote"] not in seen:
                 seen.add(row["connote"])
                 unique_rows.append(row)
-
         all_rows = unique_rows
 
     wb = Workbook()
     ws = wb.active
     ws.title = "Connotes"
-    ws.append(["Connote Number", "Weight (Kg)", "Cubic Weight"])
+
+    if include_cost_report:
+        ws.append(["Connote Number", "Weight (Kg)", "Cubic Weight", "Cost Ex Fuel"])
+    else:
+        ws.append(["Connote Number", "Weight (Kg)", "Cubic Weight"])
 
     for row in all_rows:
-        ws.append([row["connote"], row["weight"], row["cubic"]])
-        
-    # Format Weight
+        if include_cost_report:
+            if fuel_percent > 0:
+                cost_ex_fuel = row["total_cost"] / (1 + (fuel_percent / 100))
+            else:
+                cost_ex_fuel = row["total_cost"]
+
+            ws.append([row["connote"], row["weight"], row["cubic"], cost_ex_fuel])
+        else:
+            ws.append([row["connote"], row["weight"], row["cubic"]])
+
     for cell in ws["B"][1:]:
         cell.number_format = '0.00'
 
-    # Format Cubic Weight
     for cell in ws["C"][1:]:
         cell.number_format = '0.00'
+
+    if include_cost_report:
+        for cell in ws["D"][1:]:
+            cell.number_format = '$#,##0.00'
 
     output = BytesIO()
     wb.save(output)
