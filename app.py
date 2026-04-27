@@ -69,16 +69,24 @@ def extract_connotes_from_pdf(filepath):
 
                 parts = line.split()
 
-                # Expected Northline row ending:
+                # Expected row:
                 # ... TotalItems Weight Cubic $TotalCost
                 if len(parts) >= 5:
                     connote = parts[1].strip()
-                    cubic = parts[-2].replace(",", "").strip()
+                    weight = parts[-3].replace(",", "").strip()
+                    raw_cubic = parts[-2].replace(",", "").strip()
 
-                    if re.fullmatch(r"[A-Z0-9\-]{6,30}", connote) and re.fullmatch(r"\d+(\.\d+)?", cubic):
+                    if (
+                        re.fullmatch(r"[A-Z0-9\-]{6,30}", connote)
+                        and re.fullmatch(r"\d+(\.\d+)?", weight)
+                        and re.fullmatch(r"\d+(\.\d+)?", raw_cubic)
+                    ):
+                        cubic_weight = float(raw_cubic) * 250
+
                         rows.append({
                             "connote": connote,
-                            "cubic": cubic
+                            "weight": float(weight),
+                            "cubic": cubic_weight
                         })
 
     return rows
@@ -215,10 +223,18 @@ def extract_pdf_connotes():
     wb = Workbook()
     ws = wb.active
     ws.title = "Connotes"
-    ws.append(["Connote Number", "Cubic"])
+    ws.append(["Connote Number", "Weight (Kg)", "Cubic Weight"])
 
     for row in all_rows:
-        ws.append([row["connote"], row["cubic"]])
+        ws.append([row["connote"], row["weight"], row["cubic"]])
+        
+    # Format Weight
+    for cell in ws["B"][1:]:
+        cell.number_format = '0.00'
+
+    # Format Cubic Weight
+    for cell in ws["C"][1:]:
+        cell.number_format = '0.00'
 
     output = BytesIO()
     wb.save(output)
