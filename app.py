@@ -239,7 +239,13 @@ def extract_pdf_connotes():
     for row in all_rows:
         if include_cost_report:
             if fuel_percent > 0:
-                cost_ex_fuel = row["total_cost"] / (1 + (fuel_percent / 100))
+                from decimal import Decimal, ROUND_HALF_UP
+
+                cost_ex_fuel = float(
+                    (Decimal(str(row["total_cost"])) /
+                     (Decimal("1") + Decimal(str(fuel_percent)) / Decimal("100")))
+                    .quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+                )
             else:
                 cost_ex_fuel = row["total_cost"]
 
