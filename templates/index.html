@@ -16,109 +16,22 @@ body{font-family:Arial,sans-serif;background:#f4f6f8;margin:0;padding:30px}.wrap
 <div class="card northline">
 <div class="tool-label">Northline</div>
 <h2>PDF Connote Extractor</h2>
-<form class="processing-form" action="/extract-pdf-connotes" method="post" enctype="multipart/form-data">
+<form class="processing-form northline-pdf-form" action="/extract-pdf-connotes-json" method="post" enctype="multipart/form-data">
 <input type="file" name="pdf_files" multiple>
-<div class="drop-zone">Drop PDF files here</div>
-<div class="selected-files"></div>
+<div class="drop-zone">Drop PDF files here</div><div class="selected-files"></div>
 <label style="display:block;margin-top:12px;"><input type="checkbox" name="remove_duplicates"> Remove duplicates</label>
-<div class="northline-extra-options">
-<label><input type="checkbox" name="include_cost_report"> Include cost ex fuel column</label>
-<label>Fuel surcharge % to remove <input type="number" name="fuel_surcharge_percent" step="0.01" placeholder="e.g. 49.07" class="calc-input fuel-input"></label>
+<div class="northline-extra-options"><label><input type="checkbox" name="include_cost_report"> Include cost ex fuel column</label><label>Fuel surcharge % to remove <input type="number" name="fuel_surcharge_percent" step="0.01" placeholder="e.g. 49.07" class="calc-input fuel-input"></label></div>
+<button type="submit">Extract PDF</button><div class="progress-wrap"><div class="progress-bar"></div></div><div class="status-message"></div>
+</form></div>
+<div class="card cubic"><div class="tool-label">Calculations</div><h2>Cubic Calculator</h2><label>Total Cubic</label><div class="cubic-top-row"><input id="cubicTotal" type="number" step="0.0001" class="calc-input cubic-total-input" placeholder="e.g. 3.8592"><button type="button" id="calculateCubicBtn" class="copy-btn-purple">Calculate</button><button type="button" id="clearCubicBtn" class="clear-cubic-btn">Clear</button></div><label>Dimensions</label><div class="dim-grid"><input id="cubicA" type="number" step="0.0001" class="calc-input" placeholder="Length"><input id="cubicB" type="number" step="0.0001" class="calc-input" placeholder="Width"><input id="cubicC" type="number" step="0.0001" class="calc-input" placeholder="Height"></div><div class="cubic-note">Enter any 3 of the 4 boxes, then click Calculate to work out the missing one.</div><label>Multiplier</label><select id="cubicMultiplier" class="calc-input"><option value="250">250</option><option value="333" selected>333</option></select><div class="result-label">Cubic Weight</div><div class="result-row"><div class="result-value" id="cubicWeightResult">0.0000</div><button type="button" class="copy-btn copy-btn-purple" id="copyCubicWeightBtn">Copy</button></div></div>
 </div>
-<button type="submit">Extract PDF</button>
-<div class="progress-wrap"><div class="progress-bar"></div></div>
-<div class="status-message"></div>
-</form>
-</div>
-<div class="card cubic">
-<div class="tool-label">Calculations</div>
-<h2>Cubic Calculator</h2>
-<label>Total Cubic</label>
-<div class="cubic-top-row">
-<input id="cubicTotal" type="number" step="0.0001" class="calc-input cubic-total-input" placeholder="e.g. 3.8592">
-<button type="button" id="calculateCubicBtn" class="copy-btn-purple">Calculate</button>
-<button type="button" id="clearCubicBtn" class="clear-cubic-btn">Clear</button>
-</div>
-<label>Dimensions</label>
-<div class="dim-grid">
-<input id="cubicA" type="number" step="0.0001" class="calc-input" placeholder="Length">
-<input id="cubicB" type="number" step="0.0001" class="calc-input" placeholder="Width">
-<input id="cubicC" type="number" step="0.0001" class="calc-input" placeholder="Height">
-</div>
-<div class="cubic-note">Enter any 3 of the 4 boxes, then click Calculate to work out the missing one.</div>
-<label>Multiplier</label>
-<select id="cubicMultiplier" class="calc-input"><option value="250">250</option><option value="333" selected>333</option></select>
-<div class="result-label">Cubic Weight</div>
-<div class="result-row"><div class="result-value" id="cubicWeightResult">0.0000</div><button type="button" class="copy-btn copy-btn-purple" id="copyCubicWeightBtn">Copy</button></div>
-</div>
-</div>
-<div class="column">
-<div class="card airroad">
-<div class="tool-label">Airroad Reverse Billing</div>
-<h2>Amount / Comment Extractor</h2>
-<form class="processing-form" action="/extract-amount-comments" method="post" enctype="multipart/form-data">
-<input type="file" name="excel_files" multiple>
-<div class="drop-zone">Drop Excel files here</div>
-<div class="selected-files"></div>
-<button type="submit">Extract Excel</button>
-<div class="progress-wrap"><div class="progress-bar"></div></div>
-<div class="status-message"></div>
-</form>
-</div>
-</div>
-<div class="column">
-<div class="card calc">
-<div class="tool-label">Calculations</div>
-<h2>Fuel Calculator</h2>
-<div class="percent-section"><div class="percent-section-title">Pinned favourites</div><div class="percent-buttons" id="favoritePercentButtons"></div></div>
-<div class="percent-section"><div class="percent-section-title">Recent / common percentages</div><div class="percent-buttons" id="percentButtons"></div></div>
-<div class="pin-row"><input type="number" id="favoritePercentInput" class="calc-input pin-input" step="0.01" placeholder="e.g. 49.07"><button type="button" class="pin-btn" id="addFavoriteBtn">Pin Favourite %</button></div>
-<div class="small-note">Pinned percentages stay at the top. Right-click a pinned button to remove it.</div>
-<label>Total Price</label><input id="totalPrice" type="number" step="0.01" class="calc-input" placeholder="e.g. 445.80">
-<label>Fuel %</label><input id="fuelPercent" type="number" step="0.01" class="calc-input" placeholder="e.g. 49.07">
-<div class="calc-result-row"><div class="calc-result">Base: <span id="baseResult">$0.00</span></div><button type="button" class="copy-btn" id="copyBase">Copy</button></div>
-<hr>
-<label>Base Price</label><input id="basePrice" type="number" step="0.01" class="calc-input" placeholder="e.g. 299.10">
-<label>Fuel %</label><input id="fuelPercentAdd" type="number" step="0.01" class="calc-input" placeholder="e.g. 49.07">
-<div class="calc-result-row"><div class="calc-result">Total: <span id="totalResult">$0.00</span></div><button type="button" class="copy-btn" id="copyTotal">Copy</button></div>
-<div class="history-box"><div class="history-head"><div class="history-title">History</div><button type="button" class="history-clear-btn" id="clearHistoryBtn">Clear History</button></div><div id="history" class="history"></div></div>
-</div>
-</div>
-</div>
-</div>
+<div class="column"><div class="card airroad"><div class="tool-label">Airroad Reverse Billing</div><h2>Amount / Comment Extractor</h2><form class="processing-form" action="/extract-amount-comments" method="post" enctype="multipart/form-data"><input type="file" name="excel_files" multiple><div class="drop-zone">Drop Excel files here</div><div class="selected-files"></div><button type="submit">Extract Excel</button><div class="progress-wrap"><div class="progress-bar"></div></div><div class="status-message"></div></form></div></div>
+<div class="column"><div class="card calc"><div class="tool-label">Calculations</div><h2>Fuel Calculator</h2><div class="percent-section"><div class="percent-section-title">Pinned favourites</div><div class="percent-buttons" id="favoritePercentButtons"></div></div><div class="percent-section"><div class="percent-section-title">Recent / common percentages</div><div class="percent-buttons" id="percentButtons"></div></div><div class="pin-row"><input type="number" id="favoritePercentInput" class="calc-input pin-input" step="0.01" placeholder="e.g. 49.07"><button type="button" class="pin-btn" id="addFavoriteBtn">Pin Favourite %</button></div><div class="small-note">Pinned percentages stay at the top. Right-click a pinned button to remove it.</div><label>Total Price</label><input id="totalPrice" type="number" step="0.01" class="calc-input" placeholder="e.g. 445.80"><label>Fuel %</label><input id="fuelPercent" type="number" step="0.01" class="calc-input" placeholder="e.g. 49.07"><div class="calc-result-row"><div class="calc-result">Base: <span id="baseResult">$0.00</span></div><button type="button" class="copy-btn" id="copyBase">Copy</button></div><hr><label>Base Price</label><input id="basePrice" type="number" step="0.01" class="calc-input" placeholder="e.g. 299.10"><label>Fuel %</label><input id="fuelPercentAdd" type="number" step="0.01" class="calc-input" placeholder="e.g. 49.07"><div class="calc-result-row"><div class="calc-result">Total: <span id="totalResult">$0.00</span></div><button type="button" class="copy-btn" id="copyTotal">Copy</button></div><div class="history-box"><div class="history-head"><div class="history-title">History</div><button type="button" class="history-clear-btn" id="clearHistoryBtn">Clear History</button></div><div id="history" class="history"></div></div></div></div>
+</div></div>
 <script>
-const MAX=4*1024*1024;
-document.querySelectorAll(".processing-form").forEach(f=>{let input=f.querySelector("input[type=file]"),drop=f.querySelector(".drop-zone"),list=f.querySelector(".selected-files"),wrap=f.querySelector(".progress-wrap"),bar=f.querySelector(".progress-bar"),status=f.querySelector(".status-message");drop.onclick=()=>input.click();drop.ondrop=e=>{e.preventDefault();drop.classList.remove("dragover");input.files=e.dataTransfer.files;update()};drop.ondragover=e=>{e.preventDefault();drop.classList.add("dragover")};drop.ondragleave=()=>drop.classList.remove("dragover");input.onchange=update;function update(){list.innerHTML="";[...input.files].forEach(file=>{let d=document.createElement("div");d.className="file-pill";if(file.size>MAX)d.classList.add("oversize");d.innerHTML=`<span>${file.name}</span><span>${(file.size/1024/1024).toFixed(2)}MB</span>`;list.appendChild(d)})}f.onsubmit=e=>{e.preventDefault();for(let file of input.files){if(file.size>MAX){status.textContent=`File too big: ${file.name}`;status.className="status-message status-error";return}}let xhr=new XMLHttpRequest();xhr.open("POST",f.action);xhr.responseType="blob";wrap.style.display="block";status.textContent="";status.className="status-message";xhr.upload.onprogress=e=>{if(e.lengthComputable)bar.style.width=(e.loaded/e.total*100)+"%"};xhr.onload=()=>{wrap.style.display="none";bar.style.width="0%";if(xhr.status>=200&&xhr.status<300){let url=URL.createObjectURL(xhr.response),a=document.createElement("a"),name="file.xlsx",h=xhr.getResponseHeader("Content-Disposition");if(h){let utf=h.match(/filename\*=UTF-8''([^;]+)/),normal=h.match(/filename="([^"]+)"/);if(utf&&utf[1])name=decodeURIComponent(utf[1]);else if(normal&&normal[1])name=normal[1]}a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);status.textContent="✔ File extracted successfully";status.className="status-message status-success"}else{
-    const reader = new FileReader();
-    reader.onload = () => {
-        status.textContent = reader.result || "Something went wrong while extracting the file.";
-        status.className = "status-message status-error";
-    };
-    reader.readAsText(xhr.response);
-}};xhr.onerror=()=>{
-    wrap.style.display="none";
-    bar.style.width="0%";
-    status.textContent="Upload failed. Check the Python terminal for the real error.";
-    status.className="status-message status-error";
-};let cleanData = new FormData();
-
-// Add normal form fields
-new FormData(f).forEach((value, key) => {
-    if (!(value instanceof File)) {
-        cleanData.append(key, value);
-    }
-});
-
-// Add files again, but with safe filenames
-[...input.files].forEach((file) => {
-    let safeName = file.name
-        .replace(/returns?/gi, "returnfile")
-        .replace(/[^a-zA-Z0-9._-]/g, "_");
-
-    cleanData.append(input.name, file, safeName);
-});
-
-xhr.send(cleanData);}});
+const MAX=3.5*1024*1024;
+function fileToBase64(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(file);});}
+document.querySelectorAll(".processing-form").forEach(f=>{let input=f.querySelector("input[type=file]"),drop=f.querySelector(".drop-zone"),list=f.querySelector(".selected-files"),wrap=f.querySelector(".progress-wrap"),bar=f.querySelector(".progress-bar"),status=f.querySelector(".status-message");drop.onclick=()=>input.click();drop.ondrop=e=>{e.preventDefault();drop.classList.remove("dragover");input.files=e.dataTransfer.files;update()};drop.ondragover=e=>{e.preventDefault();drop.classList.add("dragover")};drop.ondragleave=()=>drop.classList.remove("dragover");input.onchange=update;function update(){list.innerHTML="";[...input.files].forEach(file=>{let d=document.createElement("div");d.className="file-pill";if(file.size>MAX)d.classList.add("oversize");d.innerHTML=`<span>${file.name}</span><span>${(file.size/1024/1024).toFixed(2)}MB</span>`;list.appendChild(d)})}f.onsubmit=async e=>{e.preventDefault();for(let file of input.files){if(file.size>MAX){status.textContent=`File too big: ${file.name}`;status.className="status-message status-error";return}}wrap.style.display="block";bar.style.width="15%";status.textContent="";status.className="status-message";try{if(f.classList.contains("northline-pdf-form")){const files=[];for(const file of input.files){const content=await fileToBase64(file);files.push({name:file.name,content});bar.style.width=Math.min(80,15+(files.length/input.files.length)*60)+"%"}const payload={remove_duplicates:!!f.querySelector('[name="remove_duplicates"]').checked,include_cost_report:!!f.querySelector('[name="include_cost_report"]').checked,fuel_surcharge_percent:f.querySelector('[name="fuel_surcharge_percent"]').value||"",files};const response=await fetch(f.action,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!response.ok){throw new Error(await response.text()||"Something went wrong while extracting the file.")}const blob=await response.blob();let name="file.xlsx";let h=response.headers.get("Content-Disposition");if(h){let utf=h.match(/filename\*=UTF-8''([^;]+)/),normal=h.match(/filename="([^"]+)"/);if(utf&&utf[1])name=decodeURIComponent(utf[1]);else if(normal&&normal[1])name=normal[1]}let url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);bar.style.width="100%";setTimeout(()=>{wrap.style.display="none";bar.style.width="0%"},500);status.textContent="✔ File extracted successfully";status.className="status-message status-success";return}let xhr=new XMLHttpRequest();xhr.open("POST",f.action);xhr.responseType="blob";xhr.upload.onprogress=e=>{if(e.lengthComputable)bar.style.width=(e.loaded/e.total*100)+"%"};xhr.onload=()=>{wrap.style.display="none";bar.style.width="0%";if(xhr.status>=200&&xhr.status<300){let url=URL.createObjectURL(xhr.response),a=document.createElement("a"),name="file.xlsx",h=xhr.getResponseHeader("Content-Disposition");if(h){let utf=h.match(/filename\*=UTF-8''([^;]+)/),normal=h.match(/filename="([^"]+)"/);if(utf&&utf[1])name=decodeURIComponent(utf[1]);else if(normal&&normal[1])name=normal[1]}a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);status.textContent="✔ File extracted successfully";status.className="status-message status-success"}else{status.textContent="Something went wrong while extracting the file.";status.className="status-message status-error"}};xhr.onerror=()=>{wrap.style.display="none";bar.style.width="0%";status.textContent="Upload failed.";status.className="status-message status-error"};xhr.send(new FormData(f))}catch(err){wrap.style.display="none";bar.style.width="0%";status.textContent=err.message||"Upload failed.";status.className="status-message status-error"}}});
 const DEFAULT_PERCENTS=[30,48,49.07,50],MAX_RECENTS=5,MAX_HISTORY=30,totalPrice=document.getElementById("totalPrice"),fuelPercent=document.getElementById("fuelPercent"),baseResult=document.getElementById("baseResult"),basePrice=document.getElementById("basePrice"),fuelPercentAdd=document.getElementById("fuelPercentAdd"),totalResult=document.getElementById("totalResult"),copyBase=document.getElementById("copyBase"),copyTotal=document.getElementById("copyTotal"),historyBox=document.getElementById("history"),clearHistoryBtn=document.getElementById("clearHistoryBtn"),percentButtons=document.getElementById("percentButtons"),favoritePercentButtons=document.getElementById("favoritePercentButtons"),favoritePercentInput=document.getElementById("favoritePercentInput"),addFavoriteBtn=document.getElementById("addFavoriteBtn");
 function formatCurrency(v){return isNaN(v)?"$0.00":"$"+Number(v).toFixed(2)}function getRecentPercents(){return JSON.parse(localStorage.getItem("recentFuelPercents")||"[]")}function setRecentPercents(list){localStorage.setItem("recentFuelPercents",JSON.stringify(list))}function saveRecentPercent(p){if(isNaN(p))return;let value=Number(p),list=getRecentPercents().filter(x=>Number(x)!==value);list.unshift(value);list=list.slice(0,MAX_RECENTS);setRecentPercents(list);renderPercentButtons()}function getFavoritePercents(){return JSON.parse(localStorage.getItem("favoriteFuelPercents")||"[]")}function setFavoritePercents(list){localStorage.setItem("favoriteFuelPercents",JSON.stringify(list))}function addFavoritePercent(p){if(isNaN(p))return;let value=Number(p),list=getFavoritePercents();if(!list.some(x=>Number(x)===value)){list.push(value);setFavoritePercents(list)}renderPercentButtons()}function removeFavoritePercent(p){let value=Number(p),list=getFavoritePercents().filter(x=>Number(x)!==value);setFavoritePercents(list);renderPercentButtons()}function applyPercent(p){const value=Number(p);fuelPercent.value=value;fuelPercentAdd.value=value;saveRecentPercent(value);calcBase(false);calcTotal(false)}function makePercentButton(p,isFavorite=false){const btn=document.createElement("button");btn.type="button";btn.className="percent-btn"+(isFavorite?" favorite":"");btn.textContent=`${Number(p).toString()}%`;btn.onclick=()=>applyPercent(p);if(isFavorite){btn.oncontextmenu=e=>{e.preventDefault();removeFavoritePercent(p)}}return btn}function renderPercentButtons(){percentButtons.innerHTML="";favoritePercentButtons.innerHTML="";const favorites=getFavoritePercents(),recents=getRecentPercents(),uniqueRecent=[...new Set([...recents,...DEFAULT_PERCENTS].map(Number))].filter(p=>!favorites.map(Number).includes(Number(p)));favoritePercentButtons.innerHTML=favorites.length===0?`<div class="history-empty">No pinned favourites yet.</div>`:"";favorites.forEach(p=>favoritePercentButtons.appendChild(makePercentButton(p,true)));uniqueRecent.forEach(p=>percentButtons.appendChild(makePercentButton(p,false)))}function getHistory(){return JSON.parse(localStorage.getItem("fuelCalcHistory")||"[]")}function setHistory(list){localStorage.setItem("fuelCalcHistory",JSON.stringify(list))}function renderHistory(){const items=getHistory();historyBox.innerHTML="";if(items.length===0){historyBox.innerHTML=`<div class="history-empty">No calculations yet.</div>`;return}items.forEach(item=>{const div=document.createElement("div");div.className="history-item";div.innerHTML=item.type==="remove"?`<strong>Remove fuel</strong><br>Total ${formatCurrency(item.input)} @ ${item.percent}% = Base ${formatCurrency(item.result)}`:`<strong>Add fuel</strong><br>Base ${formatCurrency(item.input)} @ ${item.percent}% = Total ${formatCurrency(item.result)}`;historyBox.appendChild(div)})}function addHistory(type,input,percent,result){if([input,percent,result].some(v=>isNaN(v)))return;let entry={type,input:Number(input),percent:Number(percent),result:Number(result),stamp:Date.now()},list=getHistory();if(!(list[0]&&list[0].type===entry.type&&Number(list[0].input)===entry.input&&Number(list[0].percent)===entry.percent&&Number(list[0].result)===entry.result)){list.unshift(entry);list=list.slice(0,MAX_HISTORY);setHistory(list);renderHistory()}}function calcBase(addToHistory=false){let t=parseFloat(totalPrice.value),p=parseFloat(fuelPercent.value);if(!isNaN(t)&&!isNaN(p)){let r=t/(1+p/100);baseResult.textContent=formatCurrency(r);if(addToHistory){saveRecentPercent(p);addHistory("remove",t,p,r)}}else baseResult.textContent="$0.00"}function calcTotal(addToHistory=false){let b=parseFloat(basePrice.value),p=parseFloat(fuelPercentAdd.value);if(!isNaN(b)&&!isNaN(p)){let r=b*(1+p/100);totalResult.textContent=formatCurrency(r);if(addToHistory){saveRecentPercent(p);addHistory("add",b,p,r)}}else totalResult.textContent="$0.00"}
 totalPrice.addEventListener("input",()=>calcBase(false));fuelPercent.addEventListener("input",()=>calcBase(false));basePrice.addEventListener("input",()=>calcTotal(false));fuelPercentAdd.addEventListener("input",()=>calcTotal(false));totalPrice.addEventListener("change",()=>calcBase(true));fuelPercent.addEventListener("change",()=>calcBase(true));basePrice.addEventListener("change",()=>calcTotal(true));fuelPercentAdd.addEventListener("change",()=>calcTotal(true));copyBase.onclick=async()=>{await navigator.clipboard.writeText(baseResult.textContent);copyBase.textContent="Copied";setTimeout(()=>copyBase.textContent="Copy",1000)};copyTotal.onclick=async()=>{await navigator.clipboard.writeText(totalResult.textContent);copyTotal.textContent="Copied";setTimeout(()=>copyTotal.textContent="Copy",1000)};addFavoriteBtn.onclick=()=>{const value=parseFloat(favoritePercentInput.value);if(isNaN(value))return;addFavoritePercent(value);favoritePercentInput.value=""};clearHistoryBtn.onclick=()=>{localStorage.removeItem("fuelCalcHistory");renderHistory()};favoritePercentInput.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addFavoriteBtn.click()}});
