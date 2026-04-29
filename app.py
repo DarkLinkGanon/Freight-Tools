@@ -116,9 +116,31 @@ def find_column_indexes(header_row):
     return connote_idx, amount_idx, first_comment_idx
 
 def is_valid_connote_code(value):
-    if value is None: return False
+    if value is None:
+        return False
+
     text = str(value).strip()
-    return bool(text and re.fullmatch(r"[A-Z0-9\-]+", text, flags=re.I) and re.search(r"[A-Z]", text, flags=re.I) and re.search(r"\d", text))
+
+    if not text:
+        return False
+
+    # Remove .0 if Excel stores whole-number connotes as numbers
+    if text.endswith(".0"):
+        text = text[:-2]
+
+    # Allow letters, numbers, and hyphens
+    if not re.fullmatch(r"[A-Z0-9\-]+", text, flags=re.IGNORECASE):
+        return False
+
+    # Must contain at least one number
+    if not re.search(r"\d", text):
+        return False
+
+    # Must be long enough to be a real connote
+    if len(text) < 6:
+        return False
+
+    return True
 
 def extract_amount_rows_from_excel(filepath):
     extracted_rows = []
