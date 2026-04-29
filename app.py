@@ -295,12 +295,27 @@ def load_levy_data(include_rates=False):
         reader = csv.DictReader(f)
 
         for row in reader:
-            date = (
+            from datetime import datetime
+
+            raw_date = (
                 row.get("Effective Date")
                 or row.get("effective date")
                 or row.get("Current Effective Date")
                 or ""
             ).strip()
+
+            if not raw_date:
+                continue
+
+            # Convert to Australian format DD/MM/YYYY
+            try:
+                if "-" in raw_date:
+                    date_obj = datetime.strptime(raw_date, "%Y-%m-%d")
+                    date = date_obj.strftime("%d/%m/%Y")
+                else:
+                    date = raw_date  # already correct format
+            except:
+                date = raw_date
 
             if not date:
                 continue
@@ -330,7 +345,23 @@ def load_levy_data(include_rates=False):
 
                 levy_data.setdefault(group, []).append(item)
 
-    return levy_data
+        from datetime import datetime
+
+        # Sort each levy group by date (newest first)
+        for group in levy_data:
+            def parse_date(item):
+                try:
+                    return datetime.strptime(item["date"], "%d/%m/%Y")
+                except:
+                    return datetime.min
+
+            levy_data[group] = sorted(
+                levy_data[group],
+                key=parse_date,
+                reverse=True
+            )
+
+        return levy_data
 
 
 @app.route("/", methods=["GET"])
