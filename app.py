@@ -206,7 +206,7 @@ def find_column_indexes(header_row):
             connote_idx = i
         if amount_idx is None and header == "amount":
             amount_idx = i
-        if first_comment_idx is None and header == "comment":
+        if first_comment_idx is None and header in ["comment", "comments", "firstcomment", "firstcomments"]:
             first_comment_idx = i
 
     return connote_idx, amount_idx, first_comment_idx
