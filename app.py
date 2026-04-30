@@ -8,6 +8,7 @@ import tempfile
 import base64
 import csv
 from decimal import Decimal, ROUND_HALF_UP
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -17,6 +18,10 @@ FUEL_LOOKUP_PIN = os.environ.get("FUEL_LOOKUP_PIN", "1234")
 def make_output_filename(original_filename, suffix=" extracted data", new_extension=".xlsx"):
     base_name = os.path.splitext(os.path.basename(original_filename))[0]
     return f"{base_name}{suffix}{new_extension}"
+
+
+def data_path(filename):
+    return os.path.join(os.path.dirname(__file__), "data", filename)
 
 
 def save_uploaded_file(file_storage, suffix):
@@ -44,6 +49,39 @@ def money_ex_fuel(total_cost, fuel_percent):
     ).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
 
     return float(result)
+
+
+def normalise_date_text(value):
+    if value is None:
+        return ""
+
+    if hasattr(value, "strftime"):
+        return value.strftime("%d/%m/%Y")
+
+    text = str(value).strip()
+    if not text:
+        return ""
+
+    for fmt in ("%Y-%m-%d", "%d-%m-%Y", "%d/%m/%Y", "%m/%d/%Y", "%d %b %Y", "%d %B %Y"):
+        try:
+            return datetime.strptime(text, fmt).strftime("%d/%m/%Y")
+        except ValueError:
+            pass
+
+    return text
+
+
+def parse_date_for_sort(text):
+    if not text:
+        return datetime.min
+
+    for fmt in ("%d/%m/%Y", "%Y-%m-%d", "%d-%m-%Y", "%m/%d/%Y", "%d %b %Y", "%d %B %Y"):
+        try:
+            return datetime.strptime(str(text).strip(), fmt)
+        except ValueError:
+            pass
+
+    return datetime.min
 
 
 def extract_connotes_from_pdf(filepath):
@@ -250,10 +288,6 @@ def extract_amount_rows_from_excel(filepath):
     return extracted_rows
 
 
-def data_path(filename):
-    return os.path.join(os.path.dirname(__file__), "data", filename)
-
-
 def load_contacts():
     contacts = {}
 
@@ -285,6 +319,19 @@ def load_contacts():
 
 
 def load_levy_data(include_rates=False):
+    """Load fuel history.
+
+    Supports both formats:
+    1. New/customer-specific format:
+       Company, Levy Group, Effective Date, Fuel Surcharge
+    2. Older/group-only format:
+       Levy Group, Effective Date, Fuel Surcharge
+    3. Original wide format:
+       Effective Date, Run Date, Diesel Price, Customer A 1.15, Customer B 1.10...
+
+    Returned dictionary keys are either Company names (for customer-specific rows)
+    or Levy Group names (for group-level fallback rows).
+    """
     levy_data = {}
 
     path = data_path("fuel_levy_history_report.csv")
@@ -293,75 +340,121 @@ def load_levy_data(include_rates=False):
 
     with open(path, newline="", encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames or []
 
-        for row in reader:
-            from datetime import datetime
+        has_company = "Company" in fieldnames
+        has_clean_columns = "Levy Group" in fieldnames and "Effective Date" in fieldnames and "Fuel Surcharge" in fieldnames
 
-            raw_date = (
-                row.get("Effective Date")
-                or row.get("effective date")
-                or row.get("Current Effective Date")
-                or ""
-            ).strip()
+        # New/customer-specific or old/group-only clean format
+        if has_clean_columns:
+            for row in reader:
+                company = (row.get("Company") or "").strip()
+                group = (row.get("Levy Group") or "").strip()
+                date = normalise_date_text(row.get("Effective Date"))
+                rate = (row.get("Fuel Surcharge") or "").strip()
 
-            if not raw_date:
-                continue
-
-            # Convert to Australian format DD/MM/YYYY
-            try:
-                if "-" in raw_date:
-                    date_obj = datetime.strptime(raw_date, "%Y-%m-%d")
-                    date = date_obj.strftime("%d/%m/%Y")
-                else:
-                    date = raw_date  # already correct format
-            except:
-                date = raw_date
-
-            if not date:
-                continue
-
-            # In this CSV, levy groups are column headers
-            for group, rate in row.items():
-                if group is None:
+                if not date or not rate:
                     continue
 
-                group = group.strip()
-
-                if group in ["Effective Date", "Run Date", "Diesel Price (cpl)", "Status", "Emails Sent"]:
-                    continue
-
-                if not group:
-                    continue
-
-                rate_text = "" if rate is None else str(rate).strip()
-
-                if not rate_text:
+                # If Company exists, key by Company. Otherwise fall back to Levy Group.
+                lookup_key = company if company else group
+                if not lookup_key:
                     continue
 
                 item = {"date": date}
-
                 if include_rates:
-                    item["rate"] = rate_text
+                    item["rate"] = rate
+                    item["levy_group"] = group
 
-                levy_data.setdefault(group, []).append(item)
+                levy_data.setdefault(lookup_key, []).append(item)
 
-        from datetime import datetime
+        # Original wide format: levy groups are column headers
+        else:
+            for row in reader:
+                date = normalise_date_text(
+                    row.get("Effective Date")
+                    or row.get("effective date")
+                    or row.get("Current Effective Date")
+                    or ""
+                )
 
-        # Sort each levy group by date (newest first)
-        for group in levy_data:
-            def parse_date(item):
-                try:
-                    return datetime.strptime(item["date"], "%d/%m/%Y")
-                except:
-                    return datetime.min
+                if not date:
+                    continue
 
-            levy_data[group] = sorted(
-                levy_data[group],
-                key=parse_date,
-                reverse=True
-            )
+                for group, rate in row.items():
+                    if group is None:
+                        continue
 
-        return levy_data
+                    group = group.strip()
+
+                    if group in ["Effective Date", "Run Date", "Diesel Price (cpl)", "Status", "Emails Sent"]:
+                        continue
+
+                    if not group:
+                        continue
+
+                    rate_text = "" if rate is None else str(rate).strip()
+
+                    if not rate_text:
+                        continue
+
+                    item = {"date": date}
+                    if include_rates:
+                        item["rate"] = rate_text
+                        item["levy_group"] = group
+
+                    levy_data.setdefault(group, []).append(item)
+
+    # Deduplicate by date within each key, then sort newest first
+    for key in list(levy_data.keys()):
+        by_date = {}
+        for item in levy_data[key]:
+            by_date[item.get("date")] = item
+
+        levy_data[key] = sorted(
+            by_date.values(),
+            key=lambda item: parse_date_for_sort(item.get("date")),
+            reverse=True
+        )
+
+    return levy_data
+
+
+def build_customer_lookup_data(include_rates=False):
+    """Return lookup data keyed by customer name.
+
+    Customer-specific rows are preferred. If a customer has no direct rows,
+    it falls back to their Levy Group from contacts_export.csv.
+    """
+    contacts = load_contacts()
+    raw_levy_data = load_levy_data(include_rates=include_rates)
+
+    customer_lookup = {}
+    customer_dates = {}
+
+    for customer, group in contacts.items():
+        direct_rows = raw_levy_data.get(customer, [])
+        group_rows = raw_levy_data.get(group, [])
+
+        combined = {}
+
+        # Add group rows first, then customer rows override same-date values.
+        for row in group_rows:
+            combined[row.get("date")] = row
+
+        for row in direct_rows:
+            combined[row.get("date")] = row
+
+        rows = sorted(
+            combined.values(),
+            key=lambda item: parse_date_for_sort(item.get("date")),
+            reverse=True
+        )
+
+        customer_lookup[customer] = customer
+        customer_dates[customer] = rows
+
+    return customer_lookup, customer_dates
 
 
 @app.route("/", methods=["GET"])
@@ -373,9 +466,10 @@ def index():
 def fuel_data():
     # Important: Do NOT send rates to the browser here.
     # The rates are only returned by /fuel-rate-secure after PIN check.
+    contacts, customer_dates = build_customer_lookup_data(include_rates=False)
     return {
-        "contacts": load_contacts(),
-        "levy_data": load_levy_data(include_rates=False),
+        "contacts": contacts,
+        "levy_data": customer_dates,
     }
 
 
@@ -389,15 +483,12 @@ def fuel_rate_secure():
     if pin != FUEL_LOOKUP_PIN:
         return {"ok": False, "error": "Invalid PIN"}, 403
 
-    contacts = load_contacts()
-    group = contacts.get(customer)
+    contacts, customer_dates = build_customer_lookup_data(include_rates=True)
 
-    if not group:
+    if customer not in contacts:
         return {"ok": False, "error": "Customer not found"}, 404
 
-    levy_data = load_levy_data(include_rates=True)
-
-    for row in levy_data.get(group, []):
+    for row in customer_dates.get(customer, []):
         if row.get("date") == date:
             return {"ok": True, "rate": row.get("rate", "")}
 
@@ -410,53 +501,147 @@ def convert_fuel_levy():
     if not file:
         return "No file uploaded", 400
 
+    existing_rows = {}
+    existing_path = data_path("fuel_levy_history_report.csv")
+
+    # 1. Load existing history first. Supports:
+    #    Company, Levy Group, Effective Date, Fuel Surcharge
+    #    Levy Group, Effective Date, Fuel Surcharge
+    #    and the old wide format.
+    if os.path.exists(existing_path):
+        with open(existing_path, newline="", encoding="utf-8-sig") as f:
+            reader = csv.DictReader(f)
+            fieldnames = reader.fieldnames or []
+
+            has_clean_columns = "Levy Group" in fieldnames and "Effective Date" in fieldnames and "Fuel Surcharge" in fieldnames
+
+            if has_clean_columns:
+                for row in reader:
+                    company = (row.get("Company") or "").strip()
+                    levy = (row.get("Levy Group") or "").strip()
+                    date = normalise_date_text(row.get("Effective Date"))
+                    rate = (row.get("Fuel Surcharge") or "").strip()
+
+                    if levy and date and rate:
+                        existing_rows[(company, levy, date)] = {
+                            "Company": company,
+                            "Levy Group": levy,
+                            "Effective Date": date,
+                            "Fuel Surcharge": rate,
+                        }
+            else:
+                for row in reader:
+                    date = normalise_date_text(row.get("Effective Date") or row.get("Current Effective Date") or "")
+
+                    if not date:
+                        continue
+
+                    for group, rate in row.items():
+                        if group is None:
+                            continue
+
+                        group = group.strip()
+
+                        if group in ["Effective Date", "Run Date", "Diesel Price (cpl)", "Status", "Emails Sent"]:
+                            continue
+
+                        rate_text = "" if rate is None else str(rate).strip()
+
+                        if group and rate_text:
+                            existing_rows[("", group, date)] = {
+                                "Company": "",
+                                "Levy Group": group,
+                                "Effective Date": date,
+                                "Fuel Surcharge": rate_text,
+                            }
+
+    # 2. Load uploaded Excel file
     wb = load_workbook(file, data_only=True)
     ws = wb.active
 
+    header_row_num = None
     headers = []
-    for cell in ws[1]:
-        headers.append("" if cell.value is None else str(cell.value).strip().lower())
 
-    def find_header(*names):
-        lower_names = [x.lower() for x in names]
-        for i, header in enumerate(headers):
-            if header in lower_names:
-                return i
-        return None
+    # Find real header row within first 20 rows
+    for row_num in range(1, min(ws.max_row, 20) + 1):
+        row_headers = []
+        for cell in ws[row_num]:
+            row_headers.append("" if cell.value is None else str(cell.value).strip().lower())
 
-    levy_idx = find_header("levy type", "levy group")
-    rate_idx = find_header("current rate", "fuel surcharge")
-    date_idx = find_header("current effective date", "effective date")
+        if (
+            "levy type" in row_headers
+            and "customer / contractor" in row_headers
+            and "current rate" in row_headers
+            and "current effective date" in row_headers
+        ):
+            header_row_num = row_num
+            headers = row_headers
+            break
 
-    if levy_idx is None or rate_idx is None or date_idx is None:
-        return "Could not find required columns: Levy Type, Current Rate, Current Effective Date", 400
+    if header_row_num is None:
+        return "Could not find required columns: Levy Type, Customer / Contractor, Current Rate, Current Effective Date", 400
 
-    output = StringIO()
-    writer = csv.writer(output)
-    writer.writerow(["Levy Group", "Effective Date", "Fuel Surcharge"])
+    levy_idx = headers.index("levy type")
+    company_idx = headers.index("customer / contractor")
+    rate_idx = headers.index("current rate")
+    date_idx = headers.index("current effective date")
 
-    for row in ws.iter_rows(min_row=2, values_only=True):
+    # 3. Add new uploaded rows into existing rows
+    for row in ws.iter_rows(min_row=header_row_num + 1, values_only=True):
         levy = row[levy_idx]
+        company = row[company_idx]
         rate = row[rate_idx]
         date = row[date_idx]
 
-        if levy is None or rate is None or date is None:
+        if levy is None or company is None or rate is None or date is None:
             continue
 
         levy_text = str(levy).strip()
+        company_text = str(company).strip()
         rate_text = str(rate).strip()
+        date_text = normalise_date_text(date)
 
-        if hasattr(date, "strftime"):
-            date_text = date.strftime("%d/%m/%Y")
-        else:
-            date_text = str(date).strip()
+        if not levy_text or not company_text or not rate_text or not date_text:
+            continue
 
-        if levy_text and rate_text and date_text:
-            writer.writerow([levy_text, date_text, rate_text])
+        # Key prevents duplicates for same customer/levy/date. New upload overwrites old row for same key.
+        existing_rows[(company_text, levy_text, date_text)] = {
+            "Company": company_text,
+            "Levy Group": levy_text,
+            "Effective Date": date_text,
+            "Fuel Surcharge": rate_text,
+        }
+
+    sorted_rows = sorted(
+        existing_rows.values(),
+        key=lambda row: (
+            parse_date_for_sort(row["Effective Date"]),
+            row["Company"].lower(),
+            row["Levy Group"].lower(),
+        ),
+        reverse=True
+    )
+
+    # 4. Output full replacement CSV
+    output = StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["Company", "Levy Group", "Effective Date", "Fuel Surcharge"])
+
+    for row in sorted_rows:
+        writer.writerow([
+            row["Company"],
+            row["Levy Group"],
+            row["Effective Date"],
+            row["Fuel Surcharge"],
+        ])
+
+    # IMPORTANT: this downloaded file is designed to replace data/fuel_levy_history_report.csv
+    download_name = "fuel_levy_history_report.csv"
 
     response = make_response(output.getvalue())
-    response.headers["Content-Disposition"] = "attachment; filename=fuel_levy_history_report.csv"
-    response.headers["Content-Type"] = "text/csv"
+    response.headers["Content-Disposition"] = f'attachment; filename="{download_name}"'
+    response.headers["Content-Type"] = "text/csv; charset=utf-8"
+
     return response
 
 

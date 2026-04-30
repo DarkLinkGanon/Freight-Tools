@@ -1,43 +1,927 @@
-Effective Date,Run Date,Diesel Price (cpl),Customer A 1.15,Customer B 1.10,Contractor A GFE,Contractor B Materia,Contractor C SRK,Contractor D LEDS,Status,Emails Sent
-2023-06-05,2023-05-31,186.2,18.34%,20.47%,9.98%,7.65%,12.93%,0.98%,Sent,0
-2023-07-10,2023-07-05,184.8,17.35%,19.43%,9.16%,6.89%,12.06%,0.76%,Sent,0
-2023-08-07,2023-08-02,189.9,17.66%,19.76%,9.42%,7.13%,12.34%,1.57%,Sent,0
-2023-09-04,2023-08-30,215.9,23.29%,25.64%,14.04%,11.47%,17.31%,5.68%,Sent,0
-2023-10-02,2023-09-27,224.2,25.84%,28.31%,16.13%,13.44%,19.57%,7.00%,Sent,0
-2023-11-06,2023-11-01,222.4,26.96%,29.48%,17.06%,14.30%,20.56%,6.71%,Sent,0
-2023-12-04,2023-11-29,211.1,25.11%,27.55%,15.54%,12.88%,18.93%,4.92%,Sent,0
-2024-01-08,2024-01-03,199.0,21.54%,23.81%,12.60%,10.12%,15.76%,3.01%,Sent,0
-2024-02-05,2024-01-31,194.8,19.49%,21.68%,10.92%,8.54%,13.96%,2.34%,Sent,0
-2024-03-04,2024-02-28,202.4,21.29%,23.55%,12.40%,9.93%,15.54%,3.55%,Sent,0
-2024-04-08,2024-04-03,200.6,21.30%,23.57%,12.41%,9.94%,15.56%,3.26%,Sent,0
-2024-05-06,2024-05-01,202.0,21.39%,23.65%,12.48%,10.00%,15.63%,3.48%,Sent,0
-2024-06-03,2024-05-29,197.2,21.03%,23.29%,12.19%,9.73%,15.32%,2.72%,Sent,0
-2024-07-08,2024-07-03,195.6,19.82%,22.02%,11.19%,8.79%,14.25%,2.47%,Sent,0
-2024-08-05,2024-07-31,193.1,19.80%,21.99%,11.17%,8.77%,14.22%,2.07%,Sent,0
-2024-09-02,2024-08-28,190.1,19.08%,21.24%,10.58%,8.22%,13.59%,1.60%,Sent,0
-2024-10-07,2024-10-02,182.2,17.10%,19.17%,8.96%,6.69%,11.84%,0.35%,Sent,0
-2024-11-04,2024-10-30,181.4,16.55%,18.60%,8.51%,6.27%,11.36%,0.22%,Sent,0
-2024-12-02,2024-11-27,182.0,16.51%,18.55%,8.47%,6.24%,11.31%,0.32%,Sent,0
-2025-01-06,2025-01-01,188.4,17.20%,19.28%,9.04%,6.77%,11.93%,1.33%,Sent,0
-2025-02-03,2025-01-29,195.3,19.15%,21.32%,10.64%,8.28%,13.65%,2.42%,Sent,0
-2025-03-03,2025-02-26,192.1,19.28%,21.45%,10.75%,8.38%,13.77%,1.92%,Sent,0
-2025-04-07,2025-04-02,188.4,18.78%,20.93%,10.34%,7.99%,13.32%,1.33%,Sent,0
-2025-05-05,2025-04-30,186.1,17.91%,20.01%,9.62%,7.32%,12.55%,0.97%,Sent,0
-2025-06-02,2025-05-28,181.9,16.92%,18.98%,8.81%,6.56%,11.68%,0.30%,Sent,0
-2025-07-07,2025-07-02,191.7,17.09%,19.16%,8.94%,6.68%,11.83%,1.85%,Sent,0
-2025-08-04,2025-07-30,187.9,18.17%,20.29%,9.83%,7.52%,12.78%,1.25%,Sent,0
-2025-09-08,2025-09-03,190.2,18.52%,20.66%,10.13%,7.79%,13.10%,1.61%,Sent,0
-2025-10-06,2025-10-01,191.1,18.85%,21.01%,10.40%,8.05%,13.39%,1.76%,Sent,0
-2025-11-03,2025-10-29,183.4,18.13%,20.25%,9.80%,7.49%,12.75%,0.54%,Sent,0
-2025-12-08,2025-12-03,189.3,17.68%,19.78%,9.43%,7.14%,12.35%,1.47%,Sent,0
-2026-01-05,2025-12-31,185.6,18.02%,20.14%,9.72%,7.41%,12.66%,0.89%,Sent,0
-2026-02-02,2026-01-28,181.8,16.94%,19.00%,8.82%,6.57%,11.70%,0.29%,Sent,0
-2026-03-02,2026-02-25,179.4,16.20%,18.23%,8.21%,6.00%,11.04%,-0.09%,Sent,0
-2026-03-16,2026-03-11,193.1,19.36%,21.53%,10.81%,8.44%,13.83%,2.07%,Archived,22
-2026-03-23,2026-03-17,242.6,31.62%,34.36%,20.89%,17.90%,24.69%,9.91%,Archived,23
-2026-03-30,2026-03-23,283.0,41.63%,44.82%,29.11%,25.63%,33.54%,16.31%,Sent,23
-2026-04-06,2026-03-30,308.7,48.00%,51.48%,34.34%,30.55%,39.18%,20.38%,Sent,23
-2026-04-13,2026-04-07,313.0,49.07%,52.60%,35.22%,31.37%,40.12%,21.06%,Sent,23
-2026-04-20,2026-04-14,319.1,50.58%,54.18%,36.46%,32.54%,41.46%,22.02%,Sent,23
-2026-04-27,2026-04-20,309.4,48.18%,51.66%,34.48%,30.68%,39.33%,20.49%,Sent,22
-2026-05-04,2026-04-28,279.4,40.74%,43.89%,28.38%,24.94%,32.75%,15.74%,Sent,23
+Company,Levy Group,Effective Date,Fuel Surcharge
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,04/05/2026,43.89%
+Vellex Logistics Pty Ltd,Customer A 1.15,04/05/2026,40.74%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,04/05/2026,40.74%
+TFMXPRESS Pty Ltd,Customer B 1.10,04/05/2026,43.89%
+Team Global Express Pty Ltd,Customer A 1.15,04/05/2026,40.74%
+SRK Transport,Contractor C SRK,04/05/2026,31.42%
+Northline Partnership,Customer A 1.15,04/05/2026,40.74%
+Materia Family Trust,Contractor B Materia,04/05/2026,23.78%
+Lakes Entrance Delivery Services,Contractor D LEDS,04/05/2026,15.74%
+Hunter Express,Customer A 1.15,04/05/2026,39.84%
+Hi Trans Express Pty Ltd,Customer A 1.15,04/05/2026,40.74%
+G&G Gippsland Pty Ltd,Contractor A GFE,04/05/2026,28.38%
+Freight Specialists Pty Ltd,Customer B 1.10,04/05/2026,42.94%
+Farm Balance Pty Ltd,Customer B 1.10,04/05/2026,43.89%
+Dux Manufacturing Ltd,Customer B 1.10,04/05/2026,43.89%
+Direct Freight Express Pty Ltd,Customer B 1.10,04/05/2026,43.89%
+Cahill Transport,Customer B 1.10,04/05/2026,43.89%
+Bluestar Logistics Pty Ltd,Customer B 1.10,04/05/2026,43.89%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,04/05/2026,43.89%
+Amalgamated National Logistics,Customer B 1.10,04/05/2026,43.89%
+Allied Overnight Express Pty Ltd,Customer B 1.10,04/05/2026,43.89%
+Airroad Pty Ltd,Customer A 1.15,04/05/2026,39.84%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,27/04/2026,51.66%
+Vellex Logistics Pty Ltd,Customer A 1.15,27/04/2026,48.18%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,27/04/2026,48.18%
+TFMXPRESS Pty Ltd,Customer B 1.10,27/04/2026,51.66%
+Team Global Express Pty Ltd,Customer A 1.15,27/04/2026,48.18%
+SRK Transport,Contractor C SRK,27/04/2026,37.99%
+Northline Partnership,Customer A 1.15,27/04/2026,48.18%
+Materia Family Trust,Contractor B Materia,27/04/2026,29.51%
+Lakes Entrance Delivery Services,Contractor D LEDS,27/04/2026,20.49%
+Hunter Express,Customer A 1.15,27/04/2026,47.27%
+Hi Trans Express Pty Ltd,Customer A 1.15,27/04/2026,48.18%
+G&G Gippsland Pty Ltd,Contractor A GFE,27/04/2026,34.48%
+Freight Specialists Pty Ltd,Customer B 1.10,27/04/2026,50.71%
+Farm Balance Pty Ltd,Customer B 1.10,27/04/2026,51.66%
+Dux Manufacturing Ltd,Customer B 1.10,27/04/2026,51.66%
+Direct Freight Express Pty Ltd,Customer B 1.10,27/04/2026,51.66%
+Cahill Transport,Customer B 1.10,27/04/2026,51.66%
+Bluestar Logistics Pty Ltd,Customer B 1.10,27/04/2026,51.66%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,27/04/2026,51.66%
+Amalgamated National Logistics,Customer B 1.10,27/04/2026,51.66%
+Allied Overnight Express Pty Ltd,Customer B 1.10,27/04/2026,51.66%
+Airroad Pty Ltd,Customer A 1.15,27/04/2026,47.27%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,20/04/2026,54.18%
+Vellex Logistics Pty Ltd,Customer A 1.15,20/04/2026,50.58%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,20/04/2026,50.58%
+TFMXPRESS Pty Ltd,Customer B 1.10,20/04/2026,54.18%
+Team Global Express Pty Ltd,Customer A 1.15,20/04/2026,50.58%
+SRK Transport,Contractor C SRK,20/04/2026,40.12%
+Northline Partnership,Customer A 1.15,20/04/2026,50.58%
+Materia Family Trust,Contractor B Materia,20/04/2026,31.37%
+Lakes Entrance Delivery Services,Contractor D LEDS,20/04/2026,22.02%
+Hunter Express,Customer A 1.15,20/04/2026,49.67%
+Hi Trans Express Pty Ltd,Customer A 1.15,20/04/2026,50.58%
+G&G Gippsland Pty Ltd,Contractor A GFE,20/04/2026,36.46%
+Freight Specialists Pty Ltd,Customer B 1.10,20/04/2026,53.23%
+Farm Balance Pty Ltd,Customer B 1.10,20/04/2026,54.18%
+Dux Manufacturing Ltd,Customer B 1.10,20/04/2026,54.18%
+Direct Freight Express Pty Ltd,Customer B 1.10,20/04/2026,54.18%
+D & E Valley Freight,Contractor A GFE,20/04/2026,36.46%
+Cahill Transport,Customer B 1.10,20/04/2026,54.18%
+Bluestar Logistics Pty Ltd,Customer B 1.10,20/04/2026,54.18%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,20/04/2026,54.18%
+Amalgamated National Logistics,Customer B 1.10,20/04/2026,54.18%
+Allied Overnight Express Pty Ltd,Customer B 1.10,20/04/2026,54.18%
+Airroad Pty Ltd,Customer A 1.15,20/04/2026,49.67%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,13/04/2026,52.60%
+Vellex Logistics Pty Ltd,Customer A 1.15,13/04/2026,49.07%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,13/04/2026,49.07%
+TFMXPRESS Pty Ltd,Customer B 1.10,13/04/2026,52.60%
+Team Global Express Pty Ltd,Customer A 1.15,13/04/2026,49.07%
+SRK Transport,Contractor C SRK,13/04/2026,38.78%
+Northline Partnership,Customer A 1.15,13/04/2026,49.07%
+Materia Family Trust,Contractor B Materia,13/04/2026,30.20%
+Lakes Entrance Delivery Services,Contractor D LEDS,13/04/2026,21.06%
+Hunter Express,Customer A 1.15,13/04/2026,48.16%
+Hi Trans Express Pty Ltd,Customer A 1.15,13/04/2026,49.07%
+G&G Gippsland Pty Ltd,Contractor A GFE,13/04/2026,35.22%
+Freight Specialists Pty Ltd,Customer B 1.10,13/04/2026,51.65%
+Farm Balance Pty Ltd,Customer B 1.10,13/04/2026,52.60%
+Dux Manufacturing Ltd,Customer B 1.10,13/04/2026,52.60%
+Direct Freight Express Pty Ltd,Customer B 1.10,13/04/2026,52.60%
+D & E Valley Freight,Contractor A GFE,13/04/2026,35.22%
+Cahill Transport,Customer B 1.10,13/04/2026,52.60%
+Bluestar Logistics Pty Ltd,Customer B 1.10,13/04/2026,52.60%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,13/04/2026,52.60%
+Amalgamated National Logistics,Customer B 1.10,13/04/2026,52.60%
+Allied Overnight Express Pty Ltd,Customer B 1.10,13/04/2026,52.60%
+Airroad Pty Ltd,Customer A 1.15,13/04/2026,49.07%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,06/04/2026,51.48%
+Vellex Logistics Pty Ltd,Customer A 1.15,06/04/2026,48.00%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,06/04/2026,48.00%
+TFMXPRESS Pty Ltd,Customer B 1.10,06/04/2026,51.48%
+Team Global Express Pty Ltd,Customer A 1.15,06/04/2026,48.00%
+SRK Transport,Contractor C SRK,06/04/2026,39.18%
+Northline Partnership,Customer A 1.15,06/04/2026,48.00%
+Materia Family Trust,Contractor B Materia,06/04/2026,30.55%
+Lakes Entrance Delivery Services,Contractor D LEDS,06/04/2026,20.38%
+Hunter Express,Customer A 1.15,06/04/2026,48.00%
+Hi Trans Express Pty Ltd,Customer A 1.15,06/04/2026,48.00%
+G&G Gippsland Pty Ltd,Contractor A GFE,06/04/2026,34.34%
+Freight Specialists Pty Ltd,Customer B 1.10,06/04/2026,51.48%
+Farm Balance Pty Ltd,Customer B 1.10,06/04/2026,51.48%
+Dux Manufacturing Ltd,Customer B 1.10,06/04/2026,51.48%
+Direct Freight Express Pty Ltd,Customer B 1.10,06/04/2026,51.48%
+Cahill Transport,Customer B 1.10,06/04/2026,51.48%
+Bluestar Logistics Pty Ltd,Customer B 1.10,06/04/2026,51.48%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,06/04/2026,51.48%
+Amalgamated National Logistics,Customer B 1.10,06/04/2026,51.48%
+Allied Overnight Express Pty Ltd,Customer B 1.10,06/04/2026,51.48%
+Airroad Pty Ltd,Customer A 1.15,06/04/2026,48.00%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,30/03/2026,44.82%
+Vellex Logistics Pty Ltd,Customer A 1.15,30/03/2026,41.63%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,30/03/2026,41.63%
+TFMXPRESS Pty Ltd,Customer B 1.10,30/03/2026,44.82%
+Team Global Express Pty Ltd,Customer A 1.15,30/03/2026,41.63%
+SRK Transport,Contractor C SRK,30/03/2026,33.54%
+Northline Partnership,Customer A 1.15,30/03/2026,41.63%
+Materia Family Trust,Contractor B Materia,30/03/2026,25.63%
+Lakes Entrance Delivery Services,Contractor D LEDS,30/03/2026,16.31%
+Hunter Express,Customer A 1.15,30/03/2026,41.63%
+Hi Trans Express Pty Ltd,Customer A 1.15,30/03/2026,41.63%
+G&G Gippsland Pty Ltd,Contractor A GFE,30/03/2026,29.11%
+Freight Specialists Pty Ltd,Customer B 1.10,30/03/2026,44.82%
+Farm Balance Pty Ltd,Customer B 1.10,30/03/2026,44.82%
+Dux Manufacturing Ltd,Customer B 1.10,30/03/2026,44.82%
+Direct Freight Express Pty Ltd,Customer B 1.10,30/03/2026,44.82%
+Cahill Transport,Customer B 1.10,30/03/2026,44.82%
+Bluestar Logistics Pty Ltd,Customer B 1.10,30/03/2026,44.82%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,30/03/2026,44.82%
+Amalgamated National Logistics,Customer B 1.10,30/03/2026,44.82%
+Allied Overnight Express Pty Ltd,Customer B 1.10,30/03/2026,44.82%
+Airroad Pty Ltd,Customer A 1.15,30/03/2026,41.63%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,23/03/2026,34.36%
+Vellex Logistics Pty Ltd,Customer A 1.15,23/03/2026,31.62%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,23/03/2026,31.62%
+TFMXPRESS Pty Ltd,Customer B 1.10,23/03/2026,34.36%
+Team Global Express Pty Ltd,Customer A 1.15,23/03/2026,31.62%
+SRK Transport,Contractor C SRK,23/03/2026,24.69%
+Northline Partnership,Customer A 1.15,23/03/2026,31.62%
+Materia Family Trust,Contractor B Materia,23/03/2026,17.90%
+Lakes Entrance Delivery Services,Contractor D LEDS,23/03/2026,9.91%
+Hunter Express,Customer A 1.15,23/03/2026,31.62%
+Hi Trans Express Pty Ltd,Customer A 1.15,23/03/2026,31.62%
+G&G Gippsland Pty Ltd,Contractor A GFE,23/03/2026,20.89%
+Freight Specialists Pty Ltd,Customer B 1.10,23/03/2026,34.36%
+Farm Balance Pty Ltd,Customer B 1.10,23/03/2026,34.36%
+Dux Manufacturing Ltd,Customer B 1.10,23/03/2026,34.36%
+Direct Freight Express Pty Ltd,Customer B 1.10,23/03/2026,34.36%
+Cahill Transport,Customer B 1.10,23/03/2026,34.36%
+Bluestar Logistics Pty Ltd,Customer B 1.10,23/03/2026,34.36%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,23/03/2026,34.36%
+Amalgamated National Logistics,Customer B 1.10,23/03/2026,34.36%
+Allied Overnight Express Pty Ltd,Customer B 1.10,23/03/2026,34.36%
+Airroad Pty Ltd,Customer A 1.15,23/03/2026,31.62%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,16/03/2026,21.53%
+Vellex Logistics Pty Ltd,Customer A 1.15,16/03/2026,19.36%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,16/03/2026,19.36%
+TFMXPRESS Pty Ltd,Customer B 1.10,16/03/2026,21.53%
+Team Global Express Pty Ltd,Customer A 1.15,16/03/2026,19.36%
+SRK Transport,Contractor C SRK,16/03/2026,13.83%
+Northline Partnership,Customer A 1.15,16/03/2026,19.36%
+Materia Family Trust,Contractor B Materia,16/03/2026,8.44%
+Lakes Entrance Delivery Services,Contractor D LEDS,16/03/2026,2.07%
+Hunter Express,Customer A 1.15,16/03/2026,19.36%
+Hi Trans Express Pty Ltd,Customer A 1.15,16/03/2026,19.36%
+G&G Gippsland Pty Ltd,Contractor A GFE,16/03/2026,10.81%
+Freight Specialists Pty Ltd,Customer B 1.10,16/03/2026,21.53%
+Farm Balance Pty Ltd,Customer B 1.10,16/03/2026,21.53%
+Dux Manufacturing Ltd,Customer B 1.10,16/03/2026,21.53%
+Direct Freight Express Pty Ltd,Customer B 1.10,16/03/2026,21.53%
+Cahill Transport,Customer B 1.10,16/03/2026,21.53%
+Bluestar Logistics Pty Ltd,Customer B 1.10,16/03/2026,21.53%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,16/03/2026,21.53%
+Amalgamated National Logistics,Customer B 1.10,16/03/2026,21.53%
+Allied Overnight Express Pty Ltd,Customer B 1.10,16/03/2026,21.53%
+Airroad Pty Ltd,Customer A 1.15,16/03/2026,19.36%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,02/03/2026,18.23%
+Vellex Logistics Pty Ltd,Customer A 1.15,02/03/2026,16.20%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,02/03/2026,16.20%
+TFMXPRESS Pty Ltd,Customer B 1.10,02/03/2026,18.23%
+Team Global Express Pty Ltd,Customer A 1.15,02/03/2026,16.20%
+SRK Transport,Contractor C SRK,02/03/2026,11.04%
+Northline Partnership,Customer A 1.15,02/03/2026,16.20%
+Materia Family Trust,Contractor B Materia,02/03/2026,6.00%
+Lakes Entrance Delivery Services,Contractor D LEDS,02/03/2026,-0.09%
+Hunter Express,Customer A 1.15,02/03/2026,16.20%
+Hi Trans Express Pty Ltd,Customer A 1.15,02/03/2026,16.20%
+G&G Gippsland Pty Ltd,Contractor A GFE,02/03/2026,8.21%
+Freight Specialists Pty Ltd,Customer B 1.10,02/03/2026,18.23%
+Farm Balance Pty Ltd,Customer B 1.10,02/03/2026,18.23%
+Dux Manufacturing Ltd,Customer B 1.10,02/03/2026,18.23%
+Direct Freight Express Pty Ltd,Customer B 1.10,02/03/2026,18.23%
+Cahill Transport,Customer B 1.10,02/03/2026,18.23%
+Bluestar Logistics Pty Ltd,Customer B 1.10,02/03/2026,18.23%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,02/03/2026,18.23%
+Amalgamated National Logistics,Customer B 1.10,02/03/2026,18.23%
+Allied Overnight Express Pty Ltd,Customer B 1.10,02/03/2026,18.23%
+Airroad Pty Ltd,Customer A 1.15,02/03/2026,16.20%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,02/02/2026,19.00%
+Vellex Logistics Pty Ltd,Customer A 1.15,02/02/2026,16.94%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,02/02/2026,16.94%
+TFMXPRESS Pty Ltd,Customer B 1.10,02/02/2026,19.00%
+Team Global Express Pty Ltd,Customer A 1.15,02/02/2026,16.94%
+SRK Transport,Contractor C SRK,02/02/2026,11.70%
+Northline Partnership,Customer A 1.15,02/02/2026,16.94%
+Materia Family Trust,Contractor B Materia,02/02/2026,6.57%
+Lakes Entrance Delivery Services,Contractor D LEDS,02/02/2026,0.29%
+Hunter Express,Customer A 1.15,02/02/2026,16.94%
+Hi Trans Express Pty Ltd,Customer A 1.15,02/02/2026,16.94%
+G&G Gippsland Pty Ltd,Contractor A GFE,02/02/2026,8.82%
+Freight Specialists Pty Ltd,Customer B 1.10,02/02/2026,19.00%
+Farm Balance Pty Ltd,Customer B 1.10,02/02/2026,19.00%
+Dux Manufacturing Ltd,Customer B 1.10,02/02/2026,19.00%
+Direct Freight Express Pty Ltd,Customer B 1.10,02/02/2026,19.00%
+Cahill Transport,Customer B 1.10,02/02/2026,19.00%
+Bluestar Logistics Pty Ltd,Customer B 1.10,02/02/2026,19.00%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,02/02/2026,19.00%
+Amalgamated National Logistics,Customer B 1.10,02/02/2026,19.00%
+Allied Overnight Express Pty Ltd,Customer B 1.10,02/02/2026,19.00%
+Airroad Pty Ltd,Customer A 1.15,02/02/2026,16.94%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,05/01/2026,20.14%
+Vellex Logistics Pty Ltd,Customer A 1.15,05/01/2026,18.02%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,05/01/2026,18.02%
+TFMXPRESS Pty Ltd,Customer B 1.10,05/01/2026,20.14%
+Team Global Express Pty Ltd,Customer A 1.15,05/01/2026,18.02%
+SRK Transport,Contractor C SRK,05/01/2026,12.66%
+Northline Partnership,Customer A 1.15,05/01/2026,18.02%
+Materia Family Trust,Contractor B Materia,05/01/2026,7.41%
+Lakes Entrance Delivery Services,Contractor D LEDS,05/01/2026,0.89%
+Hunter Express,Customer A 1.15,05/01/2026,18.02%
+Hi Trans Express Pty Ltd,Customer A 1.15,05/01/2026,18.02%
+G&G Gippsland Pty Ltd,Contractor A GFE,05/01/2026,9.72%
+Freight Specialists Pty Ltd,Customer B 1.10,05/01/2026,20.14%
+Farm Balance Pty Ltd,Customer B 1.10,05/01/2026,20.14%
+Dux Manufacturing Ltd,Customer B 1.10,05/01/2026,20.14%
+Direct Freight Express Pty Ltd,Customer B 1.10,05/01/2026,20.14%
+Cahill Transport,Customer B 1.10,05/01/2026,20.14%
+Bluestar Logistics Pty Ltd,Customer B 1.10,05/01/2026,20.14%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,05/01/2026,20.14%
+Amalgamated National Logistics,Customer B 1.10,05/01/2026,20.14%
+Allied Overnight Express Pty Ltd,Customer B 1.10,05/01/2026,20.14%
+Airroad Pty Ltd,Customer A 1.15,05/01/2026,18.02%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,08/12/2025,19.78%
+Vellex Logistics Pty Ltd,Customer A 1.15,08/12/2025,17.68%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,08/12/2025,17.68%
+TFMXPRESS Pty Ltd,Customer B 1.10,08/12/2025,19.78%
+Team Global Express Pty Ltd,Customer A 1.15,08/12/2025,17.68%
+SRK Transport,Contractor C SRK,08/12/2025,12.35%
+Northline Partnership,Customer A 1.15,08/12/2025,17.68%
+Materia Family Trust,Contractor B Materia,08/12/2025,7.14%
+Lakes Entrance Delivery Services,Contractor D LEDS,08/12/2025,1.47%
+Hunter Express,Customer A 1.15,08/12/2025,17.68%
+Hi Trans Express Pty Ltd,Customer A 1.15,08/12/2025,17.68%
+G&G Gippsland Pty Ltd,Contractor A GFE,08/12/2025,9.43%
+Freight Specialists Pty Ltd,Customer B 1.10,08/12/2025,19.78%
+Farm Balance Pty Ltd,Customer B 1.10,08/12/2025,19.78%
+Dux Manufacturing Ltd,Customer B 1.10,08/12/2025,19.78%
+Direct Freight Express Pty Ltd,Customer B 1.10,08/12/2025,19.78%
+Cahill Transport,Customer B 1.10,08/12/2025,19.78%
+Bluestar Logistics Pty Ltd,Customer B 1.10,08/12/2025,19.78%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,08/12/2025,19.78%
+Amalgamated National Logistics,Customer B 1.10,08/12/2025,19.78%
+Allied Overnight Express Pty Ltd,Customer B 1.10,08/12/2025,19.78%
+Airroad Pty Ltd,Customer A 1.15,08/12/2025,17.68%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,03/11/2025,20.25%
+Vellex Logistics Pty Ltd,Customer A 1.15,03/11/2025,18.13%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,03/11/2025,18.13%
+TFMXPRESS Pty Ltd,Customer B 1.10,03/11/2025,20.25%
+Team Global Express Pty Ltd,Customer A 1.15,03/11/2025,18.13%
+SRK Transport,Contractor C SRK,03/11/2025,12.75%
+Northline Partnership,Customer A 1.15,03/11/2025,18.13%
+Materia Family Trust,Contractor B Materia,03/11/2025,7.49%
+Lakes Entrance Delivery Services,Contractor D LEDS,03/11/2025,0.54%
+Hunter Express,Customer A 1.15,03/11/2025,18.13%
+Hi Trans Express Pty Ltd,Customer A 1.15,03/11/2025,18.13%
+G&G Gippsland Pty Ltd,Contractor A GFE,03/11/2025,9.80%
+Freight Specialists Pty Ltd,Customer B 1.10,03/11/2025,20.25%
+Farm Balance Pty Ltd,Customer B 1.10,03/11/2025,20.25%
+Dux Manufacturing Ltd,Customer B 1.10,03/11/2025,20.25%
+Direct Freight Express Pty Ltd,Customer B 1.10,03/11/2025,20.25%
+Cahill Transport,Customer B 1.10,03/11/2025,20.25%
+Bluestar Logistics Pty Ltd,Customer B 1.10,03/11/2025,20.25%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,03/11/2025,20.25%
+Amalgamated National Logistics,Customer B 1.10,03/11/2025,20.25%
+Allied Overnight Express Pty Ltd,Customer B 1.10,03/11/2025,20.25%
+Airroad Pty Ltd,Customer A 1.15,03/11/2025,18.13%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,06/10/2025,21.01%
+Vellex Logistics Pty Ltd,Customer A 1.15,06/10/2025,18.85%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,06/10/2025,18.85%
+TFMXPRESS Pty Ltd,Customer B 1.10,06/10/2025,21.01%
+Team Global Express Pty Ltd,Customer A 1.15,06/10/2025,18.85%
+SRK Transport,Contractor C SRK,06/10/2025,13.39%
+Northline Partnership,Customer A 1.15,06/10/2025,18.85%
+Materia Family Trust,Contractor B Materia,06/10/2025,8.05%
+Lakes Entrance Delivery Services,Contractor D LEDS,06/10/2025,1.76%
+Hunter Express,Customer A 1.15,06/10/2025,18.85%
+Hi Trans Express Pty Ltd,Customer A 1.15,06/10/2025,18.85%
+G&G Gippsland Pty Ltd,Contractor A GFE,06/10/2025,10.40%
+Freight Specialists Pty Ltd,Customer B 1.10,06/10/2025,21.01%
+Farm Balance Pty Ltd,Customer B 1.10,06/10/2025,21.01%
+Dux Manufacturing Ltd,Customer B 1.10,06/10/2025,21.01%
+Direct Freight Express Pty Ltd,Customer B 1.10,06/10/2025,21.01%
+Cahill Transport,Customer B 1.10,06/10/2025,21.01%
+Bluestar Logistics Pty Ltd,Customer B 1.10,06/10/2025,21.01%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,06/10/2025,21.01%
+Amalgamated National Logistics,Customer B 1.10,06/10/2025,21.01%
+Allied Overnight Express Pty Ltd,Customer B 1.10,06/10/2025,21.01%
+Airroad Pty Ltd,Customer A 1.15,06/10/2025,18.85%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,08/09/2025,20.66%
+Vellex Logistics Pty Ltd,Customer A 1.15,08/09/2025,18.52%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,08/09/2025,18.52%
+TFMXPRESS Pty Ltd,Customer B 1.10,08/09/2025,20.66%
+Team Global Express Pty Ltd,Customer A 1.15,08/09/2025,18.52%
+SRK Transport,Contractor C SRK,08/09/2025,13.10%
+Northline Partnership,Customer A 1.15,08/09/2025,18.52%
+Materia Family Trust,Contractor B Materia,08/09/2025,7.79%
+Lakes Entrance Delivery Services,Contractor D LEDS,08/09/2025,1.61%
+Hunter Express,Customer A 1.15,08/09/2025,18.52%
+Hi Trans Express Pty Ltd,Customer A 1.15,08/09/2025,18.52%
+G&G Gippsland Pty Ltd,Contractor A GFE,08/09/2025,10.13%
+Freight Specialists Pty Ltd,Customer B 1.10,08/09/2025,20.66%
+Farm Balance Pty Ltd,Customer B 1.10,08/09/2025,20.66%
+Dux Manufacturing Ltd,Customer B 1.10,08/09/2025,20.66%
+Direct Freight Express Pty Ltd,Customer B 1.10,08/09/2025,20.66%
+Cahill Transport,Customer B 1.10,08/09/2025,20.66%
+Bluestar Logistics Pty Ltd,Customer B 1.10,08/09/2025,20.66%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,08/09/2025,20.66%
+Amalgamated National Logistics,Customer B 1.10,08/09/2025,20.66%
+Allied Overnight Express Pty Ltd,Customer B 1.10,08/09/2025,20.66%
+Airroad Pty Ltd,Customer A 1.15,08/09/2025,18.52%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,04/08/2025,20.29%
+Vellex Logistics Pty Ltd,Customer A 1.15,04/08/2025,18.17%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,04/08/2025,18.17%
+TFMXPRESS Pty Ltd,Customer B 1.10,04/08/2025,20.29%
+Team Global Express Pty Ltd,Customer A 1.15,04/08/2025,18.17%
+SRK Transport,Contractor C SRK,04/08/2025,12.78%
+Northline Partnership,Customer A 1.15,04/08/2025,18.17%
+Materia Family Trust,Contractor B Materia,04/08/2025,7.52%
+Lakes Entrance Delivery Services,Contractor D LEDS,04/08/2025,1.25%
+Hunter Express,Customer A 1.15,04/08/2025,18.17%
+Hi Trans Express Pty Ltd,Customer A 1.15,04/08/2025,18.17%
+G&G Gippsland Pty Ltd,Contractor A GFE,04/08/2025,9.83%
+Freight Specialists Pty Ltd,Customer B 1.10,04/08/2025,20.29%
+Farm Balance Pty Ltd,Customer B 1.10,04/08/2025,20.29%
+Dux Manufacturing Ltd,Customer B 1.10,04/08/2025,20.29%
+Direct Freight Express Pty Ltd,Customer B 1.10,04/08/2025,20.29%
+Cahill Transport,Customer B 1.10,04/08/2025,20.29%
+Bluestar Logistics Pty Ltd,Customer B 1.10,04/08/2025,20.29%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,04/08/2025,20.29%
+Amalgamated National Logistics,Customer B 1.10,04/08/2025,20.29%
+Allied Overnight Express Pty Ltd,Customer B 1.10,04/08/2025,20.29%
+Airroad Pty Ltd,Customer A 1.15,04/08/2025,18.17%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,07/07/2025,19.16%
+Vellex Logistics Pty Ltd,Customer A 1.15,07/07/2025,17.09%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,07/07/2025,17.09%
+TFMXPRESS Pty Ltd,Customer B 1.10,07/07/2025,19.16%
+Team Global Express Pty Ltd,Customer A 1.15,07/07/2025,17.09%
+SRK Transport,Contractor C SRK,07/07/2025,11.83%
+Northline Partnership,Customer A 1.15,07/07/2025,17.09%
+Materia Family Trust,Contractor B Materia,07/07/2025,6.68%
+Lakes Entrance Delivery Services,Contractor D LEDS,07/07/2025,1.85%
+Hunter Express,Customer A 1.15,07/07/2025,17.09%
+Hi Trans Express Pty Ltd,Customer A 1.15,07/07/2025,17.09%
+G&G Gippsland Pty Ltd,Contractor A GFE,07/07/2025,8.94%
+Freight Specialists Pty Ltd,Customer B 1.10,07/07/2025,19.16%
+Farm Balance Pty Ltd,Customer B 1.10,07/07/2025,19.16%
+Dux Manufacturing Ltd,Customer B 1.10,07/07/2025,19.16%
+Direct Freight Express Pty Ltd,Customer B 1.10,07/07/2025,19.16%
+Cahill Transport,Customer B 1.10,07/07/2025,19.16%
+Bluestar Logistics Pty Ltd,Customer B 1.10,07/07/2025,19.16%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,07/07/2025,19.16%
+Amalgamated National Logistics,Customer B 1.10,07/07/2025,19.16%
+Allied Overnight Express Pty Ltd,Customer B 1.10,07/07/2025,19.16%
+Airroad Pty Ltd,Customer A 1.15,07/07/2025,17.09%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,02/06/2025,18.98%
+Vellex Logistics Pty Ltd,Customer A 1.15,02/06/2025,16.92%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,02/06/2025,16.92%
+TFMXPRESS Pty Ltd,Customer B 1.10,02/06/2025,18.98%
+Team Global Express Pty Ltd,Customer A 1.15,02/06/2025,16.92%
+SRK Transport,Contractor C SRK,02/06/2025,11.68%
+Northline Partnership,Customer A 1.15,02/06/2025,16.92%
+Materia Family Trust,Contractor B Materia,02/06/2025,6.56%
+Lakes Entrance Delivery Services,Contractor D LEDS,02/06/2025,0.30%
+Hunter Express,Customer A 1.15,02/06/2025,16.92%
+Hi Trans Express Pty Ltd,Customer A 1.15,02/06/2025,16.92%
+G&G Gippsland Pty Ltd,Contractor A GFE,02/06/2025,8.81%
+Freight Specialists Pty Ltd,Customer B 1.10,02/06/2025,18.98%
+Farm Balance Pty Ltd,Customer B 1.10,02/06/2025,18.98%
+Dux Manufacturing Ltd,Customer B 1.10,02/06/2025,18.98%
+Direct Freight Express Pty Ltd,Customer B 1.10,02/06/2025,18.98%
+Cahill Transport,Customer B 1.10,02/06/2025,18.98%
+Bluestar Logistics Pty Ltd,Customer B 1.10,02/06/2025,18.98%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,02/06/2025,18.98%
+Amalgamated National Logistics,Customer B 1.10,02/06/2025,18.98%
+Allied Overnight Express Pty Ltd,Customer B 1.10,02/06/2025,18.98%
+Airroad Pty Ltd,Customer A 1.15,02/06/2025,16.92%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,05/05/2025,20.01%
+Vellex Logistics Pty Ltd,Customer A 1.15,05/05/2025,17.91%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,05/05/2025,17.91%
+TFMXPRESS Pty Ltd,Customer B 1.10,05/05/2025,20.01%
+Team Global Express Pty Ltd,Customer A 1.15,05/05/2025,17.91%
+SRK Transport,Contractor C SRK,05/05/2025,12.55%
+Northline Partnership,Customer A 1.15,05/05/2025,17.91%
+Materia Family Trust,Contractor B Materia,05/05/2025,7.32%
+Lakes Entrance Delivery Services,Contractor D LEDS,05/05/2025,0.97%
+Hunter Express,Customer A 1.15,05/05/2025,17.91%
+Hi Trans Express Pty Ltd,Customer A 1.15,05/05/2025,17.91%
+G&G Gippsland Pty Ltd,Contractor A GFE,05/05/2025,9.62%
+Freight Specialists Pty Ltd,Customer B 1.10,05/05/2025,20.01%
+Farm Balance Pty Ltd,Customer B 1.10,05/05/2025,20.01%
+Dux Manufacturing Ltd,Customer B 1.10,05/05/2025,20.01%
+Direct Freight Express Pty Ltd,Customer B 1.10,05/05/2025,20.01%
+Cahill Transport,Customer B 1.10,05/05/2025,20.01%
+Bluestar Logistics Pty Ltd,Customer B 1.10,05/05/2025,20.01%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,05/05/2025,20.01%
+Amalgamated National Logistics,Customer B 1.10,05/05/2025,20.01%
+Allied Overnight Express Pty Ltd,Customer B 1.10,05/05/2025,20.01%
+Airroad Pty Ltd,Customer A 1.15,05/05/2025,17.91%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,07/04/2025,20.93%
+Vellex Logistics Pty Ltd,Customer A 1.15,07/04/2025,18.78%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,07/04/2025,18.78%
+TFMXPRESS Pty Ltd,Customer B 1.10,07/04/2025,20.93%
+Team Global Express Pty Ltd,Customer A 1.15,07/04/2025,18.78%
+SRK Transport,Contractor C SRK,07/04/2025,13.32%
+Northline Partnership,Customer A 1.15,07/04/2025,18.78%
+Materia Family Trust,Contractor B Materia,07/04/2025,7.99%
+Lakes Entrance Delivery Services,Contractor D LEDS,07/04/2025,1.33%
+Hunter Express,Customer A 1.15,07/04/2025,18.78%
+Hi Trans Express Pty Ltd,Customer A 1.15,07/04/2025,18.78%
+G&G Gippsland Pty Ltd,Contractor A GFE,07/04/2025,10.34%
+Freight Specialists Pty Ltd,Customer B 1.10,07/04/2025,20.93%
+Farm Balance Pty Ltd,Customer B 1.10,07/04/2025,20.93%
+Dux Manufacturing Ltd,Customer B 1.10,07/04/2025,20.93%
+Direct Freight Express Pty Ltd,Customer B 1.10,07/04/2025,20.93%
+Cahill Transport,Customer B 1.10,07/04/2025,20.93%
+Bluestar Logistics Pty Ltd,Customer B 1.10,07/04/2025,20.93%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,07/04/2025,20.93%
+Amalgamated National Logistics,Customer B 1.10,07/04/2025,20.93%
+Allied Overnight Express Pty Ltd,Customer B 1.10,07/04/2025,20.93%
+Airroad Pty Ltd,Customer A 1.15,07/04/2025,18.78%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,03/03/2025,21.45%
+Vellex Logistics Pty Ltd,Customer A 1.15,03/03/2025,19.28%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,03/03/2025,19.28%
+TFMXPRESS Pty Ltd,Customer B 1.10,03/03/2025,21.45%
+Team Global Express Pty Ltd,Customer A 1.15,03/03/2025,19.28%
+SRK Transport,Contractor C SRK,03/03/2025,13.77%
+Northline Partnership,Customer A 1.15,03/03/2025,19.28%
+Materia Family Trust,Contractor B Materia,03/03/2025,8.38%
+Lakes Entrance Delivery Services,Contractor D LEDS,03/03/2025,1.92%
+Hunter Express,Customer A 1.15,03/03/2025,19.28%
+Hi Trans Express Pty Ltd,Customer A 1.15,03/03/2025,19.28%
+G&G Gippsland Pty Ltd,Contractor A GFE,03/03/2025,10.75%
+Freight Specialists Pty Ltd,Customer B 1.10,03/03/2025,21.45%
+Farm Balance Pty Ltd,Customer B 1.10,03/03/2025,21.45%
+Dux Manufacturing Ltd,Customer B 1.10,03/03/2025,21.45%
+Direct Freight Express Pty Ltd,Customer B 1.10,03/03/2025,21.45%
+Cahill Transport,Customer B 1.10,03/03/2025,21.45%
+Bluestar Logistics Pty Ltd,Customer B 1.10,03/03/2025,21.45%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,03/03/2025,21.45%
+Amalgamated National Logistics,Customer B 1.10,03/03/2025,21.45%
+Allied Overnight Express Pty Ltd,Customer B 1.10,03/03/2025,21.45%
+Airroad Pty Ltd,Customer A 1.15,03/03/2025,19.28%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,03/02/2025,21.32%
+Vellex Logistics Pty Ltd,Customer A 1.15,03/02/2025,19.15%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,03/02/2025,19.15%
+TFMXPRESS Pty Ltd,Customer B 1.10,03/02/2025,21.32%
+Team Global Express Pty Ltd,Customer A 1.15,03/02/2025,19.15%
+SRK Transport,Contractor C SRK,03/02/2025,13.65%
+Northline Partnership,Customer A 1.15,03/02/2025,19.15%
+Materia Family Trust,Contractor B Materia,03/02/2025,8.28%
+Lakes Entrance Delivery Services,Contractor D LEDS,03/02/2025,2.42%
+Hunter Express,Customer A 1.15,03/02/2025,19.15%
+Hi Trans Express Pty Ltd,Customer A 1.15,03/02/2025,19.15%
+G&G Gippsland Pty Ltd,Contractor A GFE,03/02/2025,10.64%
+Freight Specialists Pty Ltd,Customer B 1.10,03/02/2025,21.32%
+Farm Balance Pty Ltd,Customer B 1.10,03/02/2025,21.32%
+Dux Manufacturing Ltd,Customer B 1.10,03/02/2025,21.32%
+Direct Freight Express Pty Ltd,Customer B 1.10,03/02/2025,21.32%
+Cahill Transport,Customer B 1.10,03/02/2025,21.32%
+Bluestar Logistics Pty Ltd,Customer B 1.10,03/02/2025,21.32%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,03/02/2025,21.32%
+Amalgamated National Logistics,Customer B 1.10,03/02/2025,21.32%
+Allied Overnight Express Pty Ltd,Customer B 1.10,03/02/2025,21.32%
+Airroad Pty Ltd,Customer A 1.15,03/02/2025,19.15%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,06/01/2025,19.28%
+Vellex Logistics Pty Ltd,Customer A 1.15,06/01/2025,17.20%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,06/01/2025,17.20%
+TFMXPRESS Pty Ltd,Customer B 1.10,06/01/2025,19.28%
+Team Global Express Pty Ltd,Customer A 1.15,06/01/2025,17.20%
+SRK Transport,Contractor C SRK,06/01/2025,11.93%
+Northline Partnership,Customer A 1.15,06/01/2025,17.20%
+Materia Family Trust,Contractor B Materia,06/01/2025,6.77%
+Lakes Entrance Delivery Services,Contractor D LEDS,06/01/2025,1.33%
+Hunter Express,Customer A 1.15,06/01/2025,17.20%
+Hi Trans Express Pty Ltd,Customer A 1.15,06/01/2025,17.20%
+G&G Gippsland Pty Ltd,Contractor A GFE,06/01/2025,9.04%
+Freight Specialists Pty Ltd,Customer B 1.10,06/01/2025,19.28%
+Farm Balance Pty Ltd,Customer B 1.10,06/01/2025,19.28%
+Dux Manufacturing Ltd,Customer B 1.10,06/01/2025,19.28%
+Direct Freight Express Pty Ltd,Customer B 1.10,06/01/2025,19.28%
+Cahill Transport,Customer B 1.10,06/01/2025,19.28%
+Bluestar Logistics Pty Ltd,Customer B 1.10,06/01/2025,19.28%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,06/01/2025,19.28%
+Amalgamated National Logistics,Customer B 1.10,06/01/2025,19.28%
+Allied Overnight Express Pty Ltd,Customer B 1.10,06/01/2025,19.28%
+Airroad Pty Ltd,Customer A 1.15,06/01/2025,17.20%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,02/12/2024,18.55%
+Vellex Logistics Pty Ltd,Customer A 1.15,02/12/2024,16.51%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,02/12/2024,16.51%
+TFMXPRESS Pty Ltd,Customer B 1.10,02/12/2024,18.55%
+Team Global Express Pty Ltd,Customer A 1.15,02/12/2024,16.51%
+SRK Transport,Contractor C SRK,02/12/2024,11.31%
+Northline Partnership,Customer A 1.15,02/12/2024,16.51%
+Materia Family Trust,Contractor B Materia,02/12/2024,6.24%
+Lakes Entrance Delivery Services,Contractor D LEDS,02/12/2024,0.32%
+Hunter Express,Customer A 1.15,02/12/2024,16.51%
+Hi Trans Express Pty Ltd,Customer A 1.15,02/12/2024,16.51%
+G&G Gippsland Pty Ltd,Contractor A GFE,02/12/2024,8.47%
+Freight Specialists Pty Ltd,Customer B 1.10,02/12/2024,18.55%
+Farm Balance Pty Ltd,Customer B 1.10,02/12/2024,18.55%
+Dux Manufacturing Ltd,Customer B 1.10,02/12/2024,18.55%
+Direct Freight Express Pty Ltd,Customer B 1.10,02/12/2024,18.55%
+Cahill Transport,Customer B 1.10,02/12/2024,18.55%
+Bluestar Logistics Pty Ltd,Customer B 1.10,02/12/2024,18.55%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,02/12/2024,18.55%
+Amalgamated National Logistics,Customer B 1.10,02/12/2024,18.55%
+Allied Overnight Express Pty Ltd,Customer B 1.10,02/12/2024,18.55%
+Airroad Pty Ltd,Customer A 1.15,02/12/2024,16.51%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,04/11/2024,18.60%
+Vellex Logistics Pty Ltd,Customer A 1.15,04/11/2024,16.55%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,04/11/2024,16.55%
+TFMXPRESS Pty Ltd,Customer B 1.10,04/11/2024,18.60%
+Team Global Express Pty Ltd,Customer A 1.15,04/11/2024,16.55%
+SRK Transport,Contractor C SRK,04/11/2024,11.36%
+Northline Partnership,Customer A 1.15,04/11/2024,16.55%
+Materia Family Trust,Contractor B Materia,04/11/2024,6.27%
+Lakes Entrance Delivery Services,Contractor D LEDS,04/11/2024,0.22%
+Hunter Express,Customer A 1.15,04/11/2024,16.55%
+Hi Trans Express Pty Ltd,Customer A 1.15,04/11/2024,16.55%
+G&G Gippsland Pty Ltd,Contractor A GFE,04/11/2024,8.51%
+Freight Specialists Pty Ltd,Customer B 1.10,04/11/2024,18.60%
+Farm Balance Pty Ltd,Customer B 1.10,04/11/2024,18.60%
+Dux Manufacturing Ltd,Customer B 1.10,04/11/2024,18.60%
+Direct Freight Express Pty Ltd,Customer B 1.10,04/11/2024,18.60%
+Cahill Transport,Customer B 1.10,04/11/2024,18.60%
+Bluestar Logistics Pty Ltd,Customer B 1.10,04/11/2024,18.60%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,04/11/2024,18.60%
+Amalgamated National Logistics,Customer B 1.10,04/11/2024,18.60%
+Allied Overnight Express Pty Ltd,Customer B 1.10,04/11/2024,18.60%
+Airroad Pty Ltd,Customer A 1.15,04/11/2024,16.55%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,07/10/2024,19.17%
+Vellex Logistics Pty Ltd,Customer A 1.15,07/10/2024,17.10%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,07/10/2024,17.10%
+TFMXPRESS Pty Ltd,Customer B 1.10,07/10/2024,19.17%
+Team Global Express Pty Ltd,Customer A 1.15,07/10/2024,17.10%
+SRK Transport,Contractor C SRK,07/10/2024,11.84%
+Northline Partnership,Customer A 1.15,07/10/2024,17.10%
+Materia Family Trust,Contractor B Materia,07/10/2024,6.69%
+Lakes Entrance Delivery Services,Contractor D LEDS,07/10/2024,0.35%
+Hunter Express,Customer A 1.15,07/10/2024,17.10%
+Hi Trans Express Pty Ltd,Customer A 1.15,07/10/2024,17.10%
+G&G Gippsland Pty Ltd,Contractor A GFE,07/10/2024,8.96%
+Freight Specialists Pty Ltd,Customer B 1.10,07/10/2024,19.17%
+Farm Balance Pty Ltd,Customer B 1.10,07/10/2024,19.17%
+Dux Manufacturing Ltd,Customer B 1.10,07/10/2024,19.17%
+Direct Freight Express Pty Ltd,Customer B 1.10,07/10/2024,19.17%
+Cahill Transport,Customer B 1.10,07/10/2024,19.17%
+Bluestar Logistics Pty Ltd,Customer B 1.10,07/10/2024,19.17%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,07/10/2024,19.17%
+Amalgamated National Logistics,Customer B 1.10,07/10/2024,19.17%
+Allied Overnight Express Pty Ltd,Customer B 1.10,07/10/2024,19.17%
+Airroad Pty Ltd,Customer A 1.15,07/10/2024,17.10%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,02/09/2024,21.24%
+Vellex Logistics Pty Ltd,Customer A 1.15,02/09/2024,19.08%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,02/09/2024,19.08%
+TFMXPRESS Pty Ltd,Customer B 1.10,02/09/2024,21.24%
+Team Global Express Pty Ltd,Customer A 1.15,02/09/2024,19.08%
+SRK Transport,Contractor C SRK,02/09/2024,13.59%
+Northline Partnership,Customer A 1.15,02/09/2024,19.08%
+Materia Family Trust,Contractor B Materia,02/09/2024,8.22%
+Lakes Entrance Delivery Services,Contractor D LEDS,02/09/2024,1.60%
+Hunter Express,Customer A 1.15,02/09/2024,19.08%
+Hi Trans Express Pty Ltd,Customer A 1.15,02/09/2024,19.08%
+G&G Gippsland Pty Ltd,Contractor A GFE,02/09/2024,10.58%
+Freight Specialists Pty Ltd,Customer B 1.10,02/09/2024,21.24%
+Farm Balance Pty Ltd,Customer B 1.10,02/09/2024,21.24%
+Dux Manufacturing Ltd,Customer B 1.10,02/09/2024,21.24%
+Direct Freight Express Pty Ltd,Customer B 1.10,02/09/2024,21.24%
+Cahill Transport,Customer B 1.10,02/09/2024,21.24%
+Bluestar Logistics Pty Ltd,Customer B 1.10,02/09/2024,21.24%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,02/09/2024,21.24%
+Amalgamated National Logistics,Customer B 1.10,02/09/2024,21.24%
+Allied Overnight Express Pty Ltd,Customer B 1.10,02/09/2024,21.24%
+Airroad Pty Ltd,Customer A 1.15,02/09/2024,19.08%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,05/08/2024,21.99%
+Vellex Logistics Pty Ltd,Customer A 1.15,05/08/2024,19.80%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,05/08/2024,19.80%
+TFMXPRESS Pty Ltd,Customer B 1.10,05/08/2024,21.99%
+Team Global Express Pty Ltd,Customer A 1.15,05/08/2024,19.80%
+SRK Transport,Contractor C SRK,05/08/2024,14.22%
+Northline Partnership,Customer A 1.15,05/08/2024,19.80%
+Materia Family Trust,Contractor B Materia,05/08/2024,8.77%
+Lakes Entrance Delivery Services,Contractor D LEDS,05/08/2024,2.07%
+Hunter Express,Customer A 1.15,05/08/2024,19.80%
+Hi Trans Express Pty Ltd,Customer A 1.15,05/08/2024,19.80%
+G&G Gippsland Pty Ltd,Contractor A GFE,05/08/2024,11.17%
+Freight Specialists Pty Ltd,Customer B 1.10,05/08/2024,21.99%
+Farm Balance Pty Ltd,Customer B 1.10,05/08/2024,21.99%
+Dux Manufacturing Ltd,Customer B 1.10,05/08/2024,21.99%
+Direct Freight Express Pty Ltd,Customer B 1.10,05/08/2024,21.99%
+Cahill Transport,Customer B 1.10,05/08/2024,21.99%
+Bluestar Logistics Pty Ltd,Customer B 1.10,05/08/2024,21.99%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,05/08/2024,21.99%
+Amalgamated National Logistics,Customer B 1.10,05/08/2024,21.99%
+Allied Overnight Express Pty Ltd,Customer B 1.10,05/08/2024,21.99%
+Airroad Pty Ltd,Customer A 1.15,05/08/2024,19.80%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,08/07/2024,22.02%
+Vellex Logistics Pty Ltd,Customer A 1.15,08/07/2024,19.82%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,08/07/2024,19.82%
+TFMXPRESS Pty Ltd,Customer B 1.10,08/07/2024,22.02%
+Team Global Express Pty Ltd,Customer A 1.15,08/07/2024,19.82%
+SRK Transport,Contractor C SRK,08/07/2024,14.25%
+Northline Partnership,Customer A 1.15,08/07/2024,19.82%
+Materia Family Trust,Contractor B Materia,08/07/2024,8.79%
+Lakes Entrance Delivery Services,Contractor D LEDS,08/07/2024,2.47%
+Hunter Express,Customer A 1.15,08/07/2024,19.82%
+Hi Trans Express Pty Ltd,Customer A 1.15,08/07/2024,19.82%
+G&G Gippsland Pty Ltd,Contractor A GFE,08/07/2024,11.19%
+Freight Specialists Pty Ltd,Customer B 1.10,08/07/2024,22.02%
+Farm Balance Pty Ltd,Customer B 1.10,08/07/2024,22.02%
+Dux Manufacturing Ltd,Customer B 1.10,08/07/2024,22.02%
+Direct Freight Express Pty Ltd,Customer B 1.10,08/07/2024,22.02%
+Cahill Transport,Customer B 1.10,08/07/2024,22.02%
+Bluestar Logistics Pty Ltd,Customer B 1.10,08/07/2024,22.02%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,08/07/2024,22.02%
+Amalgamated National Logistics,Customer B 1.10,08/07/2024,22.02%
+Allied Overnight Express Pty Ltd,Customer B 1.10,08/07/2024,22.02%
+Airroad Pty Ltd,Customer A 1.15,08/07/2024,19.82%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,03/06/2024,23.29%
+Vellex Logistics Pty Ltd,Customer A 1.15,03/06/2024,21.03%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,03/06/2024,21.03%
+TFMXPRESS Pty Ltd,Customer B 1.10,03/06/2024,23.29%
+Team Global Express Pty Ltd,Customer A 1.15,03/06/2024,21.03%
+SRK Transport,Contractor C SRK,03/06/2024,15.32%
+Northline Partnership,Customer A 1.15,03/06/2024,21.03%
+Materia Family Trust,Contractor B Materia,03/06/2024,9.73%
+Lakes Entrance Delivery Services,Contractor D LEDS,03/06/2024,2.72%
+Hunter Express,Customer A 1.15,03/06/2024,21.03%
+Hi Trans Express Pty Ltd,Customer A 1.15,03/06/2024,21.03%
+G&G Gippsland Pty Ltd,Contractor A GFE,03/06/2024,12.19%
+Freight Specialists Pty Ltd,Customer B 1.10,03/06/2024,23.29%
+Farm Balance Pty Ltd,Customer B 1.10,03/06/2024,23.29%
+Dux Manufacturing Ltd,Customer B 1.10,03/06/2024,23.29%
+Direct Freight Express Pty Ltd,Customer B 1.10,03/06/2024,23.29%
+Cahill Transport,Customer B 1.10,03/06/2024,23.29%
+Bluestar Logistics Pty Ltd,Customer B 1.10,03/06/2024,23.29%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,03/06/2024,23.29%
+Amalgamated National Logistics,Customer B 1.10,03/06/2024,23.29%
+Allied Overnight Express Pty Ltd,Customer B 1.10,03/06/2024,23.29%
+Airroad Pty Ltd,Customer A 1.15,03/06/2024,21.03%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,06/05/2024,23.65%
+Vellex Logistics Pty Ltd,Customer A 1.15,06/05/2024,21.39%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,06/05/2024,21.39%
+TFMXPRESS Pty Ltd,Customer B 1.10,06/05/2024,23.65%
+Team Global Express Pty Ltd,Customer A 1.15,06/05/2024,21.39%
+SRK Transport,Contractor C SRK,06/05/2024,15.63%
+Northline Partnership,Customer A 1.15,06/05/2024,21.39%
+Materia Family Trust,Contractor B Materia,06/05/2024,10.00%
+Lakes Entrance Delivery Services,Contractor D LEDS,06/05/2024,3.48%
+Hunter Express,Customer A 1.15,06/05/2024,21.39%
+Hi Trans Express Pty Ltd,Customer A 1.15,06/05/2024,21.39%
+G&G Gippsland Pty Ltd,Contractor A GFE,06/05/2024,12.48%
+Freight Specialists Pty Ltd,Customer B 1.10,06/05/2024,23.65%
+Farm Balance Pty Ltd,Customer B 1.10,06/05/2024,23.65%
+Dux Manufacturing Ltd,Customer B 1.10,06/05/2024,23.65%
+Direct Freight Express Pty Ltd,Customer B 1.10,06/05/2024,23.65%
+Cahill Transport,Customer B 1.10,06/05/2024,23.65%
+Bluestar Logistics Pty Ltd,Customer B 1.10,06/05/2024,23.65%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,06/05/2024,23.65%
+Amalgamated National Logistics,Customer B 1.10,06/05/2024,23.65%
+Allied Overnight Express Pty Ltd,Customer B 1.10,06/05/2024,23.65%
+Airroad Pty Ltd,Customer A 1.15,06/05/2024,21.39%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,08/04/2024,23.57%
+Vellex Logistics Pty Ltd,Customer A 1.15,08/04/2024,21.30%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,08/04/2024,21.30%
+TFMXPRESS Pty Ltd,Customer B 1.10,08/04/2024,23.57%
+Team Global Express Pty Ltd,Customer A 1.15,08/04/2024,21.30%
+SRK Transport,Contractor C SRK,08/04/2024,15.56%
+Northline Partnership,Customer A 1.15,08/04/2024,21.30%
+Materia Family Trust,Contractor B Materia,08/04/2024,9.94%
+Lakes Entrance Delivery Services,Contractor D LEDS,08/04/2024,3.26%
+Hunter Express,Customer A 1.15,08/04/2024,21.30%
+Hi Trans Express Pty Ltd,Customer A 1.15,08/04/2024,21.30%
+G&G Gippsland Pty Ltd,Contractor A GFE,08/04/2024,12.41%
+Freight Specialists Pty Ltd,Customer B 1.10,08/04/2024,23.57%
+Farm Balance Pty Ltd,Customer B 1.10,08/04/2024,23.57%
+Dux Manufacturing Ltd,Customer B 1.10,08/04/2024,23.57%
+Direct Freight Express Pty Ltd,Customer B 1.10,08/04/2024,23.57%
+Cahill Transport,Customer B 1.10,08/04/2024,23.57%
+Bluestar Logistics Pty Ltd,Customer B 1.10,08/04/2024,23.57%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,08/04/2024,23.57%
+Amalgamated National Logistics,Customer B 1.10,08/04/2024,23.57%
+Allied Overnight Express Pty Ltd,Customer B 1.10,08/04/2024,23.57%
+Airroad Pty Ltd,Customer A 1.15,08/04/2024,21.30%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,04/03/2024,23.55%
+Vellex Logistics Pty Ltd,Customer A 1.15,04/03/2024,21.29%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,04/03/2024,21.29%
+TFMXPRESS Pty Ltd,Customer B 1.10,04/03/2024,23.55%
+Team Global Express Pty Ltd,Customer A 1.15,04/03/2024,21.29%
+SRK Transport,Contractor C SRK,04/03/2024,15.54%
+Northline Partnership,Customer A 1.15,04/03/2024,21.29%
+Materia Family Trust,Contractor B Materia,04/03/2024,9.93%
+Lakes Entrance Delivery Services,Contractor D LEDS,04/03/2024,3.55%
+Hunter Express,Customer A 1.15,04/03/2024,21.29%
+Hi Trans Express Pty Ltd,Customer A 1.15,04/03/2024,21.29%
+G&G Gippsland Pty Ltd,Contractor A GFE,04/03/2024,12.40%
+Freight Specialists Pty Ltd,Customer B 1.10,04/03/2024,23.55%
+Farm Balance Pty Ltd,Customer B 1.10,04/03/2024,23.55%
+Dux Manufacturing Ltd,Customer B 1.10,04/03/2024,23.55%
+Direct Freight Express Pty Ltd,Customer B 1.10,04/03/2024,23.55%
+Cahill Transport,Customer B 1.10,04/03/2024,23.55%
+Bluestar Logistics Pty Ltd,Customer B 1.10,04/03/2024,23.55%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,04/03/2024,23.55%
+Amalgamated National Logistics,Customer B 1.10,04/03/2024,23.55%
+Allied Overnight Express Pty Ltd,Customer B 1.10,04/03/2024,23.55%
+Airroad Pty Ltd,Customer A 1.15,04/03/2024,21.29%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,05/02/2024,21.68%
+Vellex Logistics Pty Ltd,Customer A 1.15,05/02/2024,19.49%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,05/02/2024,19.49%
+TFMXPRESS Pty Ltd,Customer B 1.10,05/02/2024,21.68%
+Team Global Express Pty Ltd,Customer A 1.15,05/02/2024,19.49%
+SRK Transport,Contractor C SRK,05/02/2024,13.96%
+Northline Partnership,Customer A 1.15,05/02/2024,19.49%
+Materia Family Trust,Contractor B Materia,05/02/2024,8.54%
+Lakes Entrance Delivery Services,Contractor D LEDS,05/02/2024,2.34%
+Hunter Express,Customer A 1.15,05/02/2024,19.49%
+Hi Trans Express Pty Ltd,Customer A 1.15,05/02/2024,19.49%
+G&G Gippsland Pty Ltd,Contractor A GFE,05/02/2024,10.92%
+Freight Specialists Pty Ltd,Customer B 1.10,05/02/2024,21.68%
+Farm Balance Pty Ltd,Customer B 1.10,05/02/2024,21.68%
+Dux Manufacturing Ltd,Customer B 1.10,05/02/2024,21.68%
+Direct Freight Express Pty Ltd,Customer B 1.10,05/02/2024,21.68%
+Cahill Transport,Customer B 1.10,05/02/2024,21.68%
+Bluestar Logistics Pty Ltd,Customer B 1.10,05/02/2024,21.68%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,05/02/2024,21.68%
+Amalgamated National Logistics,Customer B 1.10,05/02/2024,21.68%
+Allied Overnight Express Pty Ltd,Customer B 1.10,05/02/2024,21.68%
+Airroad Pty Ltd,Customer A 1.15,05/02/2024,19.49%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,08/01/2024,23.81%
+Vellex Logistics Pty Ltd,Customer A 1.15,08/01/2024,21.54%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,08/01/2024,21.54%
+TFMXPRESS Pty Ltd,Customer B 1.10,08/01/2024,23.81%
+Team Global Express Pty Ltd,Customer A 1.15,08/01/2024,21.54%
+SRK Transport,Contractor C SRK,08/01/2024,15.76%
+Northline Partnership,Customer A 1.15,08/01/2024,21.54%
+Materia Family Trust,Contractor B Materia,08/01/2024,10.12%
+Lakes Entrance Delivery Services,Contractor D LEDS,08/01/2024,3.01%
+Hunter Express,Customer A 1.15,08/01/2024,21.54%
+Hi Trans Express Pty Ltd,Customer A 1.15,08/01/2024,21.54%
+G&G Gippsland Pty Ltd,Contractor A GFE,08/01/2024,12.60%
+Freight Specialists Pty Ltd,Customer B 1.10,08/01/2024,23.81%
+Farm Balance Pty Ltd,Customer B 1.10,08/01/2024,23.81%
+Dux Manufacturing Ltd,Customer B 1.10,08/01/2024,23.81%
+Direct Freight Express Pty Ltd,Customer B 1.10,08/01/2024,23.81%
+Cahill Transport,Customer B 1.10,08/01/2024,23.81%
+Bluestar Logistics Pty Ltd,Customer B 1.10,08/01/2024,23.81%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,08/01/2024,23.81%
+Amalgamated National Logistics,Customer B 1.10,08/01/2024,23.81%
+Allied Overnight Express Pty Ltd,Customer B 1.10,08/01/2024,23.81%
+Airroad Pty Ltd,Customer A 1.15,08/01/2024,21.54%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,04/12/2023,27.55%
+Vellex Logistics Pty Ltd,Customer A 1.15,04/12/2023,25.11%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,04/12/2023,25.11%
+TFMXPRESS Pty Ltd,Customer B 1.10,04/12/2023,27.55%
+Team Global Express Pty Ltd,Customer A 1.15,04/12/2023,25.11%
+SRK Transport,Contractor C SRK,04/12/2023,18.93%
+Northline Partnership,Customer A 1.15,04/12/2023,25.11%
+Materia Family Trust,Contractor B Materia,04/12/2023,12.88%
+Lakes Entrance Delivery Services,Contractor D LEDS,04/12/2023,4.92%
+Hunter Express,Customer A 1.15,04/12/2023,25.11%
+Hi Trans Express Pty Ltd,Customer A 1.15,04/12/2023,25.11%
+G&G Gippsland Pty Ltd,Contractor A GFE,04/12/2023,15.54%
+Freight Specialists Pty Ltd,Customer B 1.10,04/12/2023,27.55%
+Farm Balance Pty Ltd,Customer B 1.10,04/12/2023,27.55%
+Dux Manufacturing Ltd,Customer B 1.10,04/12/2023,27.55%
+Direct Freight Express Pty Ltd,Customer B 1.10,04/12/2023,27.55%
+Cahill Transport,Customer B 1.10,04/12/2023,27.55%
+Bluestar Logistics Pty Ltd,Customer B 1.10,04/12/2023,27.55%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,04/12/2023,27.55%
+Amalgamated National Logistics,Customer B 1.10,04/12/2023,27.55%
+Allied Overnight Express Pty Ltd,Customer B 1.10,04/12/2023,27.55%
+Airroad Pty Ltd,Customer A 1.15,04/12/2023,25.11%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,06/11/2023,29.48%
+Vellex Logistics Pty Ltd,Customer A 1.15,06/11/2023,26.96%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,06/11/2023,26.96%
+TFMXPRESS Pty Ltd,Customer B 1.10,06/11/2023,29.48%
+Team Global Express Pty Ltd,Customer A 1.15,06/11/2023,26.96%
+SRK Transport,Contractor C SRK,06/11/2023,20.56%
+Northline Partnership,Customer A 1.15,06/11/2023,26.96%
+Materia Family Trust,Contractor B Materia,06/11/2023,14.30%
+Lakes Entrance Delivery Services,Contractor D LEDS,06/11/2023,6.71%
+Hunter Express,Customer A 1.15,06/11/2023,26.96%
+Hi Trans Express Pty Ltd,Customer A 1.15,06/11/2023,26.96%
+G&G Gippsland Pty Ltd,Contractor A GFE,06/11/2023,17.06%
+Freight Specialists Pty Ltd,Customer B 1.10,06/11/2023,29.48%
+Farm Balance Pty Ltd,Customer B 1.10,06/11/2023,29.48%
+Dux Manufacturing Ltd,Customer B 1.10,06/11/2023,29.48%
+Direct Freight Express Pty Ltd,Customer B 1.10,06/11/2023,29.48%
+Cahill Transport,Customer B 1.10,06/11/2023,29.48%
+Bluestar Logistics Pty Ltd,Customer B 1.10,06/11/2023,29.48%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,06/11/2023,29.48%
+Amalgamated National Logistics,Customer B 1.10,06/11/2023,29.48%
+Allied Overnight Express Pty Ltd,Customer B 1.10,06/11/2023,29.48%
+Airroad Pty Ltd,Customer A 1.15,06/11/2023,26.96%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,02/10/2023,28.31%
+Vellex Logistics Pty Ltd,Customer A 1.15,02/10/2023,25.84%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,02/10/2023,25.84%
+TFMXPRESS Pty Ltd,Customer B 1.10,02/10/2023,28.31%
+Team Global Express Pty Ltd,Customer A 1.15,02/10/2023,25.84%
+SRK Transport,Contractor C SRK,02/10/2023,19.57%
+Northline Partnership,Customer A 1.15,02/10/2023,25.84%
+Materia Family Trust,Contractor B Materia,02/10/2023,13.44%
+Lakes Entrance Delivery Services,Contractor D LEDS,02/10/2023,7.00%
+Hunter Express,Customer A 1.15,02/10/2023,25.84%
+Hi Trans Express Pty Ltd,Customer A 1.15,02/10/2023,25.84%
+G&G Gippsland Pty Ltd,Contractor A GFE,02/10/2023,16.13%
+Freight Specialists Pty Ltd,Customer B 1.10,02/10/2023,28.31%
+Farm Balance Pty Ltd,Customer B 1.10,02/10/2023,28.31%
+Dux Manufacturing Ltd,Customer B 1.10,02/10/2023,28.31%
+Direct Freight Express Pty Ltd,Customer B 1.10,02/10/2023,28.31%
+Cahill Transport,Customer B 1.10,02/10/2023,28.31%
+Bluestar Logistics Pty Ltd,Customer B 1.10,02/10/2023,28.31%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,02/10/2023,28.31%
+Amalgamated National Logistics,Customer B 1.10,02/10/2023,28.31%
+Allied Overnight Express Pty Ltd,Customer B 1.10,02/10/2023,28.31%
+Airroad Pty Ltd,Customer A 1.15,02/10/2023,25.84%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,04/09/2023,25.64%
+Vellex Logistics Pty Ltd,Customer A 1.15,04/09/2023,23.29%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,04/09/2023,23.29%
+TFMXPRESS Pty Ltd,Customer B 1.10,04/09/2023,25.64%
+Team Global Express Pty Ltd,Customer A 1.15,04/09/2023,23.29%
+SRK Transport,Contractor C SRK,04/09/2023,17.31%
+Northline Partnership,Customer A 1.15,04/09/2023,23.29%
+Materia Family Trust,Contractor B Materia,04/09/2023,11.47%
+Lakes Entrance Delivery Services,Contractor D LEDS,04/09/2023,5.68%
+Hunter Express,Customer A 1.15,04/09/2023,23.29%
+Hi Trans Express Pty Ltd,Customer A 1.15,04/09/2023,23.29%
+G&G Gippsland Pty Ltd,Contractor A GFE,04/09/2023,14.04%
+Freight Specialists Pty Ltd,Customer B 1.10,04/09/2023,25.64%
+Farm Balance Pty Ltd,Customer B 1.10,04/09/2023,25.64%
+Dux Manufacturing Ltd,Customer B 1.10,04/09/2023,25.64%
+Direct Freight Express Pty Ltd,Customer B 1.10,04/09/2023,25.64%
+Cahill Transport,Customer B 1.10,04/09/2023,25.64%
+Bluestar Logistics Pty Ltd,Customer B 1.10,04/09/2023,25.64%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,04/09/2023,25.64%
+Amalgamated National Logistics,Customer B 1.10,04/09/2023,25.64%
+Allied Overnight Express Pty Ltd,Customer B 1.10,04/09/2023,25.64%
+Airroad Pty Ltd,Customer A 1.15,04/09/2023,23.29%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,07/08/2023,19.76%
+Vellex Logistics Pty Ltd,Customer A 1.15,07/08/2023,17.66%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,07/08/2023,17.66%
+TFMXPRESS Pty Ltd,Customer B 1.10,07/08/2023,19.76%
+Team Global Express Pty Ltd,Customer A 1.15,07/08/2023,17.66%
+SRK Transport,Contractor C SRK,07/08/2023,12.34%
+Northline Partnership,Customer A 1.15,07/08/2023,17.66%
+Materia Family Trust,Contractor B Materia,07/08/2023,7.13%
+Lakes Entrance Delivery Services,Contractor D LEDS,07/08/2023,1.57%
+Hunter Express,Customer A 1.15,07/08/2023,17.66%
+Hi Trans Express Pty Ltd,Customer A 1.15,07/08/2023,17.66%
+G&G Gippsland Pty Ltd,Contractor A GFE,07/08/2023,9.42%
+Freight Specialists Pty Ltd,Customer B 1.10,07/08/2023,19.76%
+Farm Balance Pty Ltd,Customer B 1.10,07/08/2023,19.76%
+Dux Manufacturing Ltd,Customer B 1.10,07/08/2023,19.76%
+Direct Freight Express Pty Ltd,Customer B 1.10,07/08/2023,19.76%
+Cahill Transport,Customer B 1.10,07/08/2023,19.76%
+Bluestar Logistics Pty Ltd,Customer B 1.10,07/08/2023,19.76%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,07/08/2023,19.76%
+Amalgamated National Logistics,Customer B 1.10,07/08/2023,19.76%
+Allied Overnight Express Pty Ltd,Customer B 1.10,07/08/2023,19.76%
+Airroad Pty Ltd,Customer A 1.15,07/08/2023,17.66%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,10/07/2023,19.43%
+Vellex Logistics Pty Ltd,Customer A 1.15,10/07/2023,17.35%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,10/07/2023,17.35%
+TFMXPRESS Pty Ltd,Customer B 1.10,10/07/2023,19.43%
+Team Global Express Pty Ltd,Customer A 1.15,10/07/2023,17.35%
+SRK Transport,Contractor C SRK,10/07/2023,12.06%
+Northline Partnership,Customer A 1.15,10/07/2023,17.35%
+Materia Family Trust,Contractor B Materia,10/07/2023,6.89%
+Lakes Entrance Delivery Services,Contractor D LEDS,10/07/2023,0.76%
+Hunter Express,Customer A 1.15,10/07/2023,17.35%
+Hi Trans Express Pty Ltd,Customer A 1.15,10/07/2023,17.35%
+G&G Gippsland Pty Ltd,Contractor A GFE,10/07/2023,9.16%
+Freight Specialists Pty Ltd,Customer B 1.10,10/07/2023,19.43%
+Farm Balance Pty Ltd,Customer B 1.10,10/07/2023,19.43%
+Dux Manufacturing Ltd,Customer B 1.10,10/07/2023,19.43%
+Direct Freight Express Pty Ltd,Customer B 1.10,10/07/2023,19.43%
+Cahill Transport,Customer B 1.10,10/07/2023,19.43%
+Bluestar Logistics Pty Ltd,Customer B 1.10,10/07/2023,19.43%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,10/07/2023,19.43%
+Amalgamated National Logistics,Customer B 1.10,10/07/2023,19.43%
+Allied Overnight Express Pty Ltd,Customer B 1.10,10/07/2023,19.43%
+Airroad Pty Ltd,Customer A 1.15,10/07/2023,17.35%
+Wettenhalls Regional Express Pty Ltd,Customer B 1.10,05/06/2023,20.47%
+Vellex Logistics Pty Ltd,Customer A 1.15,05/06/2023,18.34%
+Total Logistics Solutions (Australia) Pty Ltd,Customer A 1.15,05/06/2023,18.34%
+TFMXPRESS Pty Ltd,Customer B 1.10,05/06/2023,20.47%
+Team Global Express Pty Ltd,Customer A 1.15,05/06/2023,18.34%
+SRK Transport,Contractor C SRK,05/06/2023,12.93%
+Northline Partnership,Customer A 1.15,05/06/2023,18.34%
+Materia Family Trust,Contractor B Materia,05/06/2023,7.65%
+Lakes Entrance Delivery Services,Contractor D LEDS,05/06/2023,0.98%
+Hunter Express,Customer A 1.15,05/06/2023,18.34%
+Hi Trans Express Pty Ltd,Customer A 1.15,05/06/2023,18.34%
+G&G Gippsland Pty Ltd,Contractor A GFE,05/06/2023,9.98%
+Freight Specialists Pty Ltd,Customer B 1.10,05/06/2023,20.47%
+Farm Balance Pty Ltd,Customer B 1.10,05/06/2023,20.47%
+Dux Manufacturing Ltd,Customer B 1.10,05/06/2023,20.47%
+Direct Freight Express Pty Ltd,Customer B 1.10,05/06/2023,20.47%
+Cahill Transport,Customer B 1.10,05/06/2023,20.47%
+Bluestar Logistics Pty Ltd,Customer B 1.10,05/06/2023,20.47%
+Aramex Linehaul Australia Pty Ltd,Customer B 1.10,05/06/2023,20.47%
+Amalgamated National Logistics,Customer B 1.10,05/06/2023,20.47%
+Allied Overnight Express Pty Ltd,Customer B 1.10,05/06/2023,20.47%
+Airroad Pty Ltd,Customer A 1.15,05/06/2023,18.34%
