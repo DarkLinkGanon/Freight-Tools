@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, send_file, make_response, jsonify
 import pdfplumber
 from openpyxl import Workbook, load_workbook
-from openpyxl.styles import PatternFill, Font, Alignment
 from io import BytesIO, StringIO
 import os
 import re
@@ -15,33 +14,6 @@ app = Flask(__name__)
 
 FUEL_LOOKUP_PIN = os.environ.get("FUEL_LOOKUP_PIN", "1234")
 
-
-
-def parse_percent_value(value):
-    if value is None:
-        return None
-
-    text = str(value).strip().replace("%", "")
-    if not text:
-        return None
-
-    try:
-        number = float(text)
-    except ValueError:
-        return None
-
-    # If stored as decimal such as 0.3984, convert to 39.84
-    if number <= 1:
-        number *= 100
-
-    return number
-
-
-def format_percent_value(value):
-    number = parse_percent_value(value)
-    if number is None:
-        return ""
-    return f"{number:.2f}%"
 
 def make_output_filename(original_filename, suffix=" extracted data", new_extension=".xlsx"):
     base_name = os.path.splitext(os.path.basename(original_filename))[0]
@@ -787,156 +759,6 @@ def extract_amount_comments():
 
     response.headers["X-Extracted-Rows"] = str(len(all_rows))
     return response
-
-
-
-@app.route("/fuel-matrix-report", methods=["POST"])
-def fuel_matrix_report():
-    data = request.get_json(force=True)
-    pin = data.get("pin")
-
-    if pin != FUEL_LOOKUP_PIN:
-        return {"ok": False, "error": "Invalid PIN"}, 403
-
-    path = data_path("fuel_levy_history_report.csv")
-    if not os.path.exists(path):
-        return {"ok": False, "error": "Fuel history file not found"}, 404
-
-    rows = []
-
-    with open(path, newline="", encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        fieldnames = reader.fieldnames or []
-
-        # Preferred customer-level format:
-        # Company, Levy Group, Effective Date, Fuel Surcharge
-        if "Company" in fieldnames and "Effective Date" in fieldnames and "Fuel Surcharge" in fieldnames:
-            for row in reader:
-                company = (row.get("Company") or "").strip()
-                levy_group = (row.get("Levy Group") or "").strip()
-                date_text = normalise_date_text(row.get("Effective Date"))
-                rate = format_percent_value(row.get("Fuel Surcharge"))
-
-                if company and date_text and rate:
-                    rows.append({
-                        "company": company,
-                        "levy_group": levy_group,
-                        "date": date_text,
-                        "rate": rate,
-                        "rate_num": parse_percent_value(rate),
-                    })
-
-        # Fallback old wide format:
-        # Effective Date, Customer A 1.15, Customer B 1.10...
-        else:
-            contacts = load_contacts()
-            group_to_companies = {}
-            for company, group in contacts.items():
-                group_to_companies.setdefault(group, []).append(company)
-
-            for row in reader:
-                date_text = normalise_date_text(row.get("Effective Date") or row.get("Current Effective Date") or "")
-
-                if not date_text:
-                    continue
-
-                for group, rate in row.items():
-                    if group is None:
-                        continue
-
-                    group = group.strip()
-
-                    if group in ["Effective Date", "Run Date", "Diesel Price (cpl)", "Status", "Emails Sent"]:
-                        continue
-
-                    rate_text = format_percent_value(rate)
-
-                    if not group or not rate_text:
-                        continue
-
-                    for company in group_to_companies.get(group, []):
-                        rows.append({
-                            "company": company,
-                            "levy_group": group,
-                            "date": date_text,
-                            "rate": rate_text,
-                            "rate_num": parse_percent_value(rate_text),
-                        })
-
-    if not rows:
-        return {"ok": False, "error": "No fuel history rows found"}, 400
-
-    dates = sorted({r["date"] for r in rows}, key=parse_date_for_sort)
-    companies = sorted({r["company"] for r in rows})
-
-    company_groups = {}
-    matrix = {}
-
-    for r in rows:
-        company_groups[r["company"]] = r["levy_group"]
-        matrix[(r["company"], r["date"])] = r
-
-    wb = Workbook()
-    ws = wb.active
-    ws.title = "Fuel Matrix"
-
-    ws.append(["Customer", "Levy Group"] + dates)
-
-    header_fill = PatternFill("solid", fgColor="1F2937")
-    header_font = Font(color="FFFFFF", bold=True)
-    green_fill = PatternFill("solid", fgColor="D1FAE5")
-    red_fill = PatternFill("solid", fgColor="FEE2E2")
-
-    for cell in ws[1]:
-        cell.fill = header_fill
-        cell.font = header_font
-        cell.alignment = Alignment(horizontal="center")
-
-    for company in companies:
-        ws.append([company, company_groups.get(company, "")] + [
-            matrix.get((company, date), {}).get("rate", "") for date in dates
-        ])
-
-        row_num = ws.max_row
-        previous_value = None
-
-        for col_num, date in enumerate(dates, start=3):
-            item = matrix.get((company, date))
-            cell = ws.cell(row=row_num, column=col_num)
-            cell.alignment = Alignment(horizontal="center")
-
-            if item and item.get("rate_num") is not None:
-                current_value = item["rate_num"]
-
-                if previous_value is not None:
-                    if current_value > previous_value:
-                        cell.fill = green_fill
-                    elif current_value < previous_value:
-                        cell.fill = red_fill
-
-                previous_value = current_value
-
-    ws.freeze_panes = "C2"
-    ws.auto_filter.ref = ws.dimensions
-
-    for col in ws.columns:
-        max_length = 0
-        column_letter = col[0].column_letter
-        for cell in col:
-            if cell.value is not None:
-                max_length = max(max_length, len(str(cell.value)))
-        ws.column_dimensions[column_letter].width = min(max_length + 2, 35)
-
-    output = BytesIO()
-    wb.save(output)
-    output.seek(0)
-
-    return send_file(
-        output,
-        as_attachment=True,
-        download_name="fuel_matrix_report.xlsx",
-        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    )
 
 
 if __name__ == "__main__":
